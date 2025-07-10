@@ -2,6 +2,18 @@ import { pgTable, text, serial, integer, boolean, timestamp, jsonb, varchar } fr
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
+import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+
+export const usersTable = pgTable("users", {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    name: varchar({ length: 255 }).notNull(),
+    age: integer().notNull(),
+    email: varchar({ length: 255 }).notNull().unique(),
+    createdAt: timestamp().defaultNow(),
+    updatedAt: timestamp().defaultNow().onUpdateNow(),
+    isActive: boolean().defaultNow(),
+    profilePicture: text().nullable(),
+});
 
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
