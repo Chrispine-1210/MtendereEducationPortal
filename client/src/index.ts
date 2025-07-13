@@ -9,7 +9,12 @@ import { usersTable } from './db/schema';
   
   const db = drizzle(process.env.DATABASE_URL!);
 
-  async function main() {
+  /**
+                                                                                 * Performs a sequence of database operations on the users table: inserts a new user, retrieves and logs all users, updates the inserted user's age, and deletes the user.
+                                                                                 *
+                                                                                 * This function demonstrates basic CRUD operations using the Drizzle ORM with a PostgreSQL database.
+                                                                                 */
+                                                                                async function main() {
     const user: typeof usersTable.$inferInsert = {
         name: 'John',
             age: 30,
