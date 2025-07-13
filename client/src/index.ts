@@ -9,7 +9,12 @@ import { usersTable } from './db/schema';
   
   const db = drizzle(process.env.DATABASE_URL!);
 
-  async function main() {
+  /**
+                                                                                 * Performs a sequence of database operations on the users table: inserts a new user, retrieves and logs all users, updates the user's age, and deletes the user.
+                                                                                 *
+                                                                                 * This function is intended for demonstration or testing purposes and executes all operations sequentially without explicit error handling.
+                                                                                 */
+                                                                                async function main() {
     const user: typeof usersTable.$inferInsert = {
         name: 'John',
             age: 30,
