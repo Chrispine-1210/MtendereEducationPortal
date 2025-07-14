@@ -22,7 +22,13 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true
     },
-    "include": [
-        "src"
-    ]
+    {
+        "extends": "./tsconfig.json",
+        "compilerOptions": {
+            "outDir": "./dist"
+        },
+        "include": [
+            "../src/**/*"
+        ]
+    }
 }
