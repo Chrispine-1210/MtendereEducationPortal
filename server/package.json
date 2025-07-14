@@ -13,7 +13,6 @@
         "express-session": "^1.17.3",
         "cors": "^2.8.5",
         "helmet": "^7.0.0",
-        "rate-limiter-flexible": "^2.4.3",
         "drizzle-orm": "^0.27.1",
         "pg": "^8.10.0"
     },
