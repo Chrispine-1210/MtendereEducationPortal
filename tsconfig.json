@@ -1,12 +1,18 @@
 {
-  "include": ["client/src/**/*", "shared/**/*", "server/**/*"],
-  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
+  "files": [],
+  "references": [
+    { "path": "tsconfig.app.json" },
+    { "path": "tsconfig.node.json" },
+    { "path": "client" },
+    { "path": "server" },
+    { "path": "shared" }
+  ],
   "compilerOptions": {
     "incremental": true,
     "tsBuildInfoFile": "node_modules/typescript/tsbuildinfo",
     "noEmit": true,
-    "module": "ESNext",
     "strict": true,
+    "module": "ESNext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "preserve",
     "esModuleInterop": true,
@@ -19,9 +25,6 @@
       "@shared/*": ["shared/*"]
     }
   },
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "include": ["client/src", "server", "shared"],
+  "exclude": ["node_modules", "build", "dist", "**/*.test.ts"]
 }
