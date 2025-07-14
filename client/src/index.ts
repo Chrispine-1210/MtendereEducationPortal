@@ -1,46 +1,16 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/node-postgres';
-const db = drizzle(process.env.DATABASE_URL!);
+// src/index.ts import express from 'express'; import path from 'path'; import session from 'express-session'; import dotenv from 'dotenv';
 
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { eq } from 'drizzle-orm';
-import { usersTable } from './db/schema';
-  
-  const db = drizzle(process.env.DATABASE_URL!);
+// Load env vars dotenv.config();
 
-  async function main() {
-    const user: typeof usersTable.$inferInsert = {
-        name: 'John',
-            age: 30,
-                email: 'john@example.com',
-                  };
+const app = express(); const PORT = process.env.PORT || 3000;
 
-                    await db.insert(usersTable).values(user);
-                      console.log('New user created!')
+app.use(express.json()); app.use(express.urlencoded({ extended: true }));
 
-                        const users = await db.select().from(usersTable);
-                          console.log('Getting all users from the database: ', users)
-                            /*
-                              const users: {
-                                  id: number;
-                                      name: string;
-                                          age: number;
-                                              email: string;
-                                                }[]
-                                                  */
+// Static frontend app.use(express.static(path.join(__dirname, '../client/dist')));
 
-                                                    await db
-                                                        .update(usersTable)
-                                                            .set({
-                                                                  age: 31,
-                                                                      })
-                                                                          .where(eq(usersTable.email, user.email));
-                                                                            console.log('User info updated!')
+// Basic API route app.get('/api/ping', (_req, res) => { res.json({ message: 'pong' }); });
 
-                                                                              await db.delete(usersTable).where(eq(usersTable.email, user.email));
-                                                                                console.log('User deleted!')
-                                                                                }
+// Fallback to index.html for SPA app.get('*', (_req, res) => { res.sendFile(path.join(__dirname, '../client/dist/index.html')); });
 
-                                                                                main();
-                                                                                
+app.listen(PORT, () => { console.log(Server running on port ${PORT}); });
+
