@@ -3,21 +3,22 @@
     "compilerOptions": {
         "composite": true,
         "noEmit": false,
-        "tsBuildInfoFile": "node_modules/typescript/node.tsbuildinfo",
-        "module": "ESNext",
-        "target": "ES2020",
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
-        "resolveJsonModule": true,
-        "strict": true,
+        "tsBuildInfoFile": "node_modules/typescript/app.tsbuildinfo",
+        "outDir": "dist",
+        "rootDir": ".",
         "isolatedModules": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noFallthroughCasesInSwitch": true
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": [
-        "vite.config.ts"
+        "client/src/**/*",
+        "server/**/*",
+        "shared/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.test.ts",
+        "dist",
+        "build"
     ]
 }
