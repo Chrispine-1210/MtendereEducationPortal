@@ -1,31 +1,36 @@
-# Base image for building frontend and backend
+
+# ---------- 1. Base builder stage ----------
+
 FROM node:20 AS builder
 
 WORKDIR /app
 
-# Copy everything
-COPY . .
+# Copy root files first
+COPY package.json package-lock.json ./
 
-# Install dependencies
+# Copy all workspaces (client, server, shared)
+COPY client ./client
+COPY server ./server
+COPY shared ./shared
+
+# Install all workspace deps
 RUN npm install
 
-# Build TypeScript backend and Vite frontend
-RUN npm run build
+# Build each workspace
+RUN npm run build -w client
+RUN npm run build -w server
 
-# --- Production Image ---
-FROM node:20-slim as production
+# ---------- 2. Final production image ----------
+FROM node:20-slim AS production
 
 WORKDIR /app
 
-# Copy built files from builder
+# Copy dist and deps only
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/client/dist ./client/dist
-COPY --from=builder /app/package.json ./
 COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./
 
-# Use production env
 ENV NODE_ENV=production
-
 EXPOSE 3000
+
 CMD ["node", "dist/index.js"]
-new changes 

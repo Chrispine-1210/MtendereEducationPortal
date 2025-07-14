@@ -1,34 +1,24 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from "path";
-
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'node:path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()], 
-  // Add tailwindcss plugin if needed
-  css:{
-      postcss: {
-        plugins: [tailwindcss(),],
-      }
-  }
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
-    },
+      '@': path.resolve(__dirname, 'client/src'),
+      '@shared': path.resolve(__dirname, 'shared'),
+      '@assets': path.resolve(__dirname, 'attached_assets')
+    }
   },
-  root: path.resolve(import.meta.dirname, "client"),
+  root: path.resolve(__dirname, 'client'),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
+    outDir: path.resolve(__dirname, 'dist/public'),
+    emptyOutDir: true
   },
   server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
-  },
+    port: 5173,
+    open: true
+  }
 });
