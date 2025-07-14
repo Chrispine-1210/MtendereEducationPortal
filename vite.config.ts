@@ -11,8 +11,8 @@ export default defineConfig({
   css:{
       postcss: {
         plugins: [tailwindcss(),],
-      }
-  }
+      },
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
