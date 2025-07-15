@@ -2,9 +2,44 @@ import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
 import { createServer as createViteServer, createLogger } from "vite";
-import { type Server } from "http";
-import viteConfig from "../../vite.config";
+import { type Server } from "https";
+import viteConfig from "./././vite.config";
 import { nanoid } from "nanoid";
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
+
+// Load environment variables
+dotenv.config();
+
+// Determine root directory using __dirname (not import.meta)
+const rootDir = path.resolve(__dirname, "../client");
+const outDir = path.resolve(__dirname, "../dist");
+
+// Export Vite config
+export default defineConfig({
+  root: rootDir,
+  plugins: [react()],
+  server: {
+    port: parseInt(process.env.CLIENT_PORT || "5173", 10),
+    proxy: {
+      "/api": {
+        target: process.env.SERVER_URL || "http://localhost:3000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+  build: {
+    outDir: outDir,
+    emptyOutDir: true,
+  },
+});
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const viteLogger = createLogger();
 
