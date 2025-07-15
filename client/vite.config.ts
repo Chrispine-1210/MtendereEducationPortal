@@ -10,6 +10,9 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared')
     }
   },
+  css: {
+    postcss: '../postcss.config.cjs',
+  },
   server: {
     port: 5173,
     proxy: {
