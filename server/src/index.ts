@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
-import { registerRoutes } from "./routes/registerRoutes";
+import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
 import { setupWebSocket } from './websocket';
 import { initWebSocket } from "./modules/websocket/socket";
