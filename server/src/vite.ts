@@ -1,120 +1,68 @@
-import express, { type Express } from "express";
-import fs from "fs";
-import path from "path";
-import { createServer as createViteServer, createLogger } from "vite";
-import { type Server } from "https";
-import viteConfig from "./././vite.config";
-import { nanoid } from "nanoid";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import express, { type Request, Response, NextFunction } from "express";
+import http from "http";
+import { registerRoutes } from "./routes/routes";
+import { setupVite, serveStatic, log } from "./vite";
 
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import dotenv from "dotenv";
+const app = express();
+const server = http.createServer(app); // ✅ Create HTTP server
 
-// Load environment variables
-dotenv.config();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
-// Determine root directory using __dirname (not import.meta)
-const rootDir = path.resolve(__dirname, "../client");
-const outDir = path.resolve(__dirname, "../dist");
+app.use((req, res, next) => {
+  const start = Date.now();
+  const path = req.path;
+  let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-// Export Vite config
-export default defineConfig({
-  root: rootDir,
-  plugins: [react()],
-  server: {
-    port: parseInt(process.env.CLIENT_PORT || "5173", 10),
-    proxy: {
-      "/api": {
-        target: process.env.SERVER_URL || "http://localhost:3000",
-        changeOrigin: true,
-        secure: false,
-      },
-    },
-  },
-  build: {
-    outDir: outDir,
-    emptyOutDir: true,
-  },
-});
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-const viteLogger = createLogger();
-
-export function log(message: string, source = "express") {
-  const formattedTime = new Date().toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: true,
-  });
-
-  console.log(`${formattedTime} [${source}] ${message}`);
-}
-
-export async function setupVite(app: Express, server: Server) {
-  const serverOptions = {
-    middlewareMode: true,
-    hmr: { server },
-    allowedHosts: true as const,
+  const originalResJson = res.json;
+  res.json = function (bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
-  const vite = await createViteServer({
-    ...viteConfig,
-    configFile: false,
-    customLogger: {
-      ...viteLogger,
-      error: (msg, options) => {
-        viteLogger.error(msg, options);
-        process.exit(1);
-      },
-    },
-    server: serverOptions,
-    appType: "custom",
-  });
-
-  app.use(vite.middlewares);
-  app.use("*", async (req, res, next) => {
-    const url = req.originalUrl;
-
-    try {
-      const clientTemplate = path.resolve(
-        import.meta.dirname,
-        "..",
-        "client",
-        "index.html",
-      );
-
-      // always reload the index.html file from disk incase it changes
-      let template = await fs.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`,
-      );
-      const page = await vite.transformIndexHtml(url, template);
-      res.status(200).set({ "Content-Type": "text/html" }).end(page);
-    } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
-      next(e);
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (path.startsWith("/api")) {
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
+      if (logLine.length > 80) {
+        logLine = logLine.slice(0, 79) + "…";
+      }
+      log(logLine);
     }
   });
-}
 
-export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  next();
+});
 
-  if (!fs.existsSync(distPath)) {
-    throw new Error(
-      `Could not find the build directory: ${distPath}, make sure to build the client first`,
-    );
+(async () => {
+  await registerRoutes(app, server); // ✅ now includes server
+
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(status).json({ message });
+    throw err;
+  });
+
+  if (app.get("env") === "development") {
+    await setupVite(app, server); // ✅ works with http.Server
+  } else {
+    serveStatic(app);
   }
 
-  app.use(express.static(distPath));
+  const port = 5000;
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    },
+    () => {
+      log(`serving on port ${port}`);
+    }
+  );
+})();
 
-  // fall through to index.html if the file doesn't exist
-  app.use("*", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
-  });
-}
