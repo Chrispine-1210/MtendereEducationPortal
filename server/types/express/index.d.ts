@@ -1,4 +1,4 @@
-import { UserPayload } from "../../src/utils/jwt"; // Adjust path to your JWT decode type
+import { JwtPayload } from "jsonwebtoken"; // Adjust path to your JWT decode type
 
 declare global {
   namespace Express {
