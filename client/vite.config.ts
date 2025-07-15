@@ -11,12 +11,16 @@ export default defineConfig({
     }
   },
   css: {
-    postcss: '../postcss.config.cjs',
+    postcss: path.resolve(__dirname, '../postcss.config.cjs'), // ✅ fix to absolute path
   },
   server: {
     port: 5173,
     proxy: {
-      '/api': 'http://localhost:3000'
+      '/api': {
+        target: 'http://localhost:5000', // ✅ fix port to match Express backend
+        changeOrigin: true,
+        secure: false,
+      },
     }
   },
   build: {
@@ -24,3 +28,4 @@ export default defineConfig({
     emptyOutDir: true
   }
 });
+
