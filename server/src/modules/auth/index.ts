@@ -1,8 +1,9 @@
-export * from "../auth/auth.routes";
-export * from "../auth/auth.controller";
-export * from "../auth/auth.service";
-export * from "../auth/auth.schema";
-export * from "../auth/auth.model";
+//export * from "../auth/auth.routes";
+//export * from "../auth/auth.controller";
+//export * from "../auth/auth.service";
+//export * from "../auth/auth.schema";
+//export * from "../auth/auth.model";
+
 export * from "../auth/auth.analytics";
 export * from "../auth/auth.broadcaster";
 
