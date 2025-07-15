@@ -120,10 +120,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           role: user.role,
         },
       });
-    } catch (error) {
-      console.error('Registration error:', error);
-      res.status(400).json({ message: 'Registration failed', error: error.message });
-    }
+      } catch (err) {
+        if (err instanceof Error) {
+          console.error(err.message);
+        } else {
+          console.error('Unknown error occurred');
+        }
+      }
   });
 
   app.post('/api/auth/login', async (req, res) => {
