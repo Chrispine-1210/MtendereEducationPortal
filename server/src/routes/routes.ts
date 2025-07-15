@@ -176,10 +176,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           role: user.role,
         },
       });
-    } catch (error) {
-      console.error('Login error:', error);
-      res.status(500).json({ message: 'Login failed', error: error.message });
-    }
+      } catch (err) {
+        if (err instanceof Error) {
+          console.error(err.message);
+        } else {
+          console.error('Unknown error occurred');
+        }
+      }
   });
 
   // User profile route
@@ -243,9 +246,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('scholarships', { type: 'scholarship_created', scholarship });
       
       res.status(201).json(scholarship);
-    } catch (error) {
-      console.error('Scholarship creation error:', error);
-      res.status(400).json({ message: 'Failed to create scholarship', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -258,9 +264,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('scholarships', { type: 'scholarship_updated', scholarship });
       
       res.json(scholarship);
-    } catch (error) {
-      console.error('Scholarship update error:', error);
-      res.status(400).json({ message: 'Failed to update scholarship', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -301,9 +310,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const jobs = await storage.searchJobs(q);
       res.json(jobs);
-    } catch (error) {
-      console.error('Job search error:', error);
-      res.status(500).json({ message: 'Failed to search jobs' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -318,9 +330,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('jobs', { type: 'job_created', job });
       
       res.status(201).json(job);
-    } catch (error) {
-      console.error('Job creation error:', error);
-      res.status(400).json({ message: 'Failed to create job', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -364,9 +379,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         : await storage.getUserApplications(req.user.id);
       
       res.json(applications);
-    } catch (error) {
-      console.error('Applications fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch applications' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -391,9 +409,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       
       res.status(201).json(application);
-    } catch (error) {
-      console.error('Application creation error:', error);
-      res.status(400).json({ message: 'Failed to create application', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -416,9 +437,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('applications', { type: 'application_updated', application });
       
       res.json(application);
-    } catch (error) {
-      console.error('Application update error:', error);
-      res.status(400).json({ message: 'Failed to update application', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -427,9 +451,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const partners = await storage.getActivePartners();
       res.json(partners);
-    } catch (error) {
-      console.error('Partners fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch partners' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -440,9 +467,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('partners', { type: 'partner_created', partner });
       
       res.status(201).json(partner);
-    } catch (error) {
-      console.error('Partner creation error:', error);
-      res.status(400).json({ message: 'Failed to create partner', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -451,9 +481,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const testimonials = await storage.getApprovedTestimonials();
       res.json(testimonials);
-    } catch (error) {
-      console.error('Testimonials fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch testimonials' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -468,9 +501,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('testimonials', { type: 'testimonial_created', testimonial });
       
       res.status(201).json(testimonial);
-    } catch (error) {
-      console.error('Testimonial creation error:', error);
-      res.status(400).json({ message: 'Failed to create testimonial', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -479,9 +515,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const blogPosts = await storage.getPublishedBlogPosts();
       res.json(blogPosts);
-    } catch (error) {
-      console.error('Blog posts fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch blog posts' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -496,9 +535,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('blog-posts', { type: 'blog_post_created', blogPost });
       
       res.status(201).json(blogPost);
-    } catch (error) {
-      console.error('Blog post creation error:', error);
-      res.status(400).json({ message: 'Failed to create blog post', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -507,9 +549,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const teamMembers = await storage.getActiveTeamMembers();
       res.json(teamMembers);
-    } catch (error) {
-      console.error('Team members fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch team members' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -520,9 +565,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('team-members', { type: 'team_member_created', teamMember });
       
       res.status(201).json(teamMember);
-    } catch (error) {
-      console.error('Team member creation error:', error);
-      res.status(400).json({ message: 'Failed to create team member', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -531,9 +579,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const referrals = await storage.getUserReferrals(req.user.id);
       res.json(referrals);
-    } catch (error) {
-      console.error('Referrals fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch referrals' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -548,9 +599,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       broadcast('referrals', { type: 'referral_created', referral });
       
       res.status(201).json(referral);
-    } catch (error) {
-      console.error('Referral creation error:', error);
-      res.status(400).json({ message: 'Failed to create referral', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -559,9 +613,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const summary = await storage.getAnalyticsSummary();
       res.json(summary);
-    } catch (error) {
-      console.error('Analytics summary error:', error);
-      res.status(500).json({ message: 'Failed to fetch analytics summary' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -573,9 +630,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         endDate ? new Date(endDate as string) : undefined
       );
       res.json(analytics);
-    } catch (error) {
-      console.error('Analytics fetch error:', error);
-      res.status(500).json({ message: 'Failed to fetch analytics' });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
@@ -589,9 +649,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const response = await getChatResponse(message);
       res.json({ response });
-    } catch (error) {
-      console.error('Chat error:', error);
-      res.status(500).json({ message: 'Failed to get chat response', error: error.message });
+    } catch (err) {
+      if (err instanceof Error) {
+        console.error(err.message);
+      } else {
+        console.error('Unknown error occurred');
+      }
     }
   });
 
