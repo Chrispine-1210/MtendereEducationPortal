@@ -57,7 +57,7 @@
 
 @layer base {
   * {
-    @apply border border-gray-300;
+    @apply border border-border;
   }
 
   body {
