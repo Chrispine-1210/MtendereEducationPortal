@@ -4,6 +4,7 @@ import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
 import { setupWebSocket } from './websocket';
 import { initWebSocket } from "./modules/websocket/socket";
+import http from 'http';
 
 const app = express();
 app.use(express.json());
@@ -38,6 +39,8 @@ app.use((req, res, next) => {
 
   next();
 });
+
+const server = http.createServer(app);
 
 (async () => {
   const server = await registerRoutes(app);
