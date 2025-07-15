@@ -1,12 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
-import { storage } from "../storage";
+import { storage } from "../../storage";
 import { insertUserSchema, insertScholarshipSchema, insertJobSchema, insertApplicationSchema, insertPartnerSchema, insertTestimonialSchema, insertBlogPostSchema, insertTeamMemberSchema, insertReferralSchema, insertAnalyticsSchema } from "@shared/schema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-import { getChatResponse } from "../ai";
+import { getChatResponse } from "../../ai";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key";
 
