@@ -43,7 +43,7 @@ app.use((req, res, next) => {
 const server = http.createServer(app);
 
 (async () => {
-  const server = await registerRoutes(app);
+  await registerRoutes(app);
 
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
