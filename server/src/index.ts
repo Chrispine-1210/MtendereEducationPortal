@@ -1,9 +1,9 @@
 import "dotenv/config";
-import { registerRoutes } from './registerRoutes';
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes/registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
 import { setupWebSocket } from './websocket';
+import { initWebSocket } from "./modules/websocket/socket";
 
 const app = express();
 app.use(express.json());
@@ -71,4 +71,6 @@ app.use((req, res, next) => {
   }, () => {
     log(`serving on port ${port}`);
   });
+
+  initWebSocket(server);
 })();

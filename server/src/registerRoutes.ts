@@ -1,5 +1,5 @@
 import { Express } from "express";
-import type { Server } from "http";
+import { Server } from "http";
 
 // Import your route modules here
 import { userRoutes } from "../modules/users/users.routes";
@@ -16,5 +16,8 @@ export const registerRoutes = async (app: Express, _server?: Server) => {
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", time: new Date().toISOString() });
   });
+
+  const sever = http.createServer(app);
+  return Server;
 };
 
