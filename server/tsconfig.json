@@ -15,6 +15,6 @@
       "typeRoots": ["./node_modules/@types", "./types/express/index.d.ts"],                      
       "sourceMap": true                           
     },
-    "include": ["src/**/*", "ai.ts"],
+    "include": ["src/**/*", "ai.ts", "types/**/*"],
     "exclude": ["node_modules", "dist"]
 }
