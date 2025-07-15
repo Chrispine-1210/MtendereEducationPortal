@@ -3,7 +3,7 @@ import { UserPayload } from "../../src/utils/jwt"; // Adjust path to your JWT de
 declare global {
   namespace Express {
     interface Request {
-      user?: UserPayload | string; // Or whatever your decoded token returns
+      user?: JwtPayload | { id: string; role: string }; // Or whatever your decoded token returns
     }
   }
 }
