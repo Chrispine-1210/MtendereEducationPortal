@@ -2,10 +2,7 @@
   "files": [],
   "references": [
     { "path": "tsconfig.app.json" },
-    { "path": "tsconfig.node.json" },
-    { "path": "client" },
-    { "path": "server" },
-    { "path": "shared" }
+    { "path": "tsconfig.node.json" }
   ],
   "compilerOptions": {
     "incremental": true,
@@ -25,7 +22,6 @@
       "@shared/*": ["shared/*"]
     }
   },
-  
   "include": ["client/src", "server", "shared"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"]
 }
