@@ -27,8 +27,7 @@ export class AuthService {
     if (email === "test@example.com" && password === "password") return { id: 1, email };
     return null;
   }
-
-  static async generateJWT(user: { id: number; email: string }) {
+x  static async generateJWT(user: { id: number; email: string }) {
     // Use env secret in production
     return jwt.sign({ sub: user.id, email: user.email }, "secret", { expiresIn: "1d" });
   }

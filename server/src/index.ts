@@ -17,10 +17,17 @@ app.use((req, res, next) => {
 
   const originalResJson = res.json;
   res.json = function (bodyJson, ...args) {
+import session from "express-session";
+import passport from "passport";
+import routes from "./routes/routes";
     capturedJsonResponse = bodyJson;
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
+app.use(session({ secret: "secret", resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use("/api", routes);
   res.on("finish", () => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
