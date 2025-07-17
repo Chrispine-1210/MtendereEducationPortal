@@ -13,8 +13,7 @@ import {
   insertTeamMemberSchema,
   insertReferralSchema,
   insertAnalyticsSchema,
-} 
-import  from "@shared/schema";
+}  from "@shared/schema";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { z } from "zod";

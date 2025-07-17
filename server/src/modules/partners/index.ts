@@ -1,10 +1,10 @@
-export * from "../partners/partners.routes";
-export * from "../partners/partners.controller";
-export * from "../partners/partners.service";
-export * from "../partners/partners.schema";
-export * from "../partners/partners.model";
-export * from "../partners/partners.analytics";
-export * from "../partners/partners.broadcaster";
+export * from "./partners.routes";
+export * from "./partners.controller";
+export * from "./partners.service";
+export * from "./partners.schema";
+export * from "./partners.model";
+export * from "./partners.analytics";
+export * from "./partners.broadcaster";
 
 import { users, jobs, analytics } from "../modules/modules";
 
