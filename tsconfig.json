@@ -12,6 +12,8 @@
     "module": "ESNext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "jsx": "preserve",
+    "rootDir": "src",
+    "outDir": "dist"
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "bundler",
