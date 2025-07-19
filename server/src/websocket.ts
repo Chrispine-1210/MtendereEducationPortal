@@ -15,7 +15,7 @@ export const setupWebSocket = (server: Server) => {
         console.log("🔌 New client connected:", socket.id);
 
         socket.on("disconnect", () => {
-            console.log("❌ Client disconnected:", socket.id);
+            console.log("Client disconnected:", socket.id);
         });
 
         socket.on("ping", () => {
