@@ -1,3 +1,5 @@
+
+@import "bootstrap/dist/css/bootstrap.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -182,16 +184,16 @@
 /* Video header styles */
 .video-header {
   position: relative;
-  height: 100vh;
+  block-size: 100vh;
   overflow: hidden;
 }
 
 .video-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: 100%;
+  block-size: 100%;
   background: linear-gradient(45deg, var(--mtendere-blue), var(--mtendere-green));
   opacity: 0.9;
   z-index: 1;
@@ -200,7 +202,7 @@
 .video-content {
   position: relative;
   z-index: 2;
-  height: 100%;
+  block-size: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -231,9 +233,9 @@
 /* Navigation styles */
 .nav-mega-menu {
   position: absolute;
-  top: 100%;
-  left: 0;
-  width: 400px;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  inline-size: 400px;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
@@ -251,37 +253,37 @@
 
 /* Admin panel styles */
 .admin-sidebar {
-  width: 250px;
+  inline-size: 250px;
   background: var(--mtendere-dark);
   color: white;
-  height: 100vh;
+  block-size: 100vh;
   position: fixed;
-  left: 0;
-  top: 0;
+  inset-inline-start: 0;
+  inset-block-start: 0;
   z-index: 1000;
   transition: transform 0.3s ease;
 }
 
 .admin-content {
-  margin-left: 250px;
+  margin-inline-start: 250px;
   padding: 2rem;
-  min-height: 100vh;
+  min-block-size: 100vh;
   background: var(--mtendere-gray);
 }
 
 /* Chat widget styles */
 .chat-widget {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  inset-block-end: 1.5rem;
+  inset-inline-end: 1.5rem;
   z-index: 1000;
 }
 
 .chat-window {
   position: absolute;
-  bottom: 4rem;
-  right: 0;
-  width: 320px;
+  inset-block-end: 4rem;
+  inset-inline-end: 0;
+  inline-size: 320px;
   background: white;
   border-radius: 0.5rem;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
