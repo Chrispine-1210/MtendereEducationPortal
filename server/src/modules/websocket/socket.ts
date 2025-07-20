@@ -1,24 +1,18 @@
-//console.log("WebSocket module placeholder loaded.");
+import { Server as SocketIOServer } from "socket.io";
+import { Server as HTTPServer } from "http";
 
-// Example scaffold if you plan to use Socket.IO later:
-
-import { Server } from "socket.io";
-import http from "http";
-import app from "../../index"; // adjust based on your app structure
-
-const server = http.createServer(app);
-const io = new Server(server, {
-    cors: {
-        origin: "*", // adjust for production
-    },
-});
-
-io.on("connection", (socket) => {
-    console.log("New client connected:", socket.id);
-
-    socket.on("disconnect", () => {
-        console.log("Client disconnected:", socket.id);
+export function initWebSocket(server: HTTPServer) {
+    const io = new SocketIOServer(server, {
+        cors: {
+            origin: "*", // adjust for production domains
+        },
     });
-});
 
-export default io;
+    io.on("connection", (socket) => {
+        console.log("New client connected:", socket.id);
+
+        socket.on("disconnect", () => {
+            console.log("Client disconnected:", socket.id);
+        });
+    });
+}
