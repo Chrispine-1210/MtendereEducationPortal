@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@middleware/*": ["middleware/*"],
+      "@middleware/*": ["src/middleware/middleware/*"],
       "shared/*": ["shared/*"],
       "modules/*": ["modules/*"]
     },
