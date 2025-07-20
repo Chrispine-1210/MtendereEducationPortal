@@ -7,7 +7,7 @@ import http from "http";
 import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
 import { initWebSocket } from "./modules/websocket/socket";
-import { errorHandler } from "./middleware/";
+import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
 app.use(express.json());
