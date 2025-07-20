@@ -1,20 +1,20 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb, varchar } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  serial,
+  integer,
+  boolean,
+  timestamp,
+  jsonb,
+  varchar
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable("users", {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    name: varchar({ length: 255 }).notNull(),
-    age: integer().notNull(),
-    email: varchar({ length: 255 }).notNull().unique(),
-    createdAt: timestamp().defaultNow(),
-    updatedAt: timestamp().defaultNow().onUpdateNow(),
-    isActive: boolean().defaultNow(),
-    profilePicture: text().nullable(),
-});
-
+//
+// Users Table
+//
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   username: varchar("username", { length: 255 }).notNull().unique(),
@@ -31,6 +31,9 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Scholarships Table
+//
 export const scholarships = pgTable("scholarships", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -49,6 +52,9 @@ export const scholarships = pgTable("scholarships", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Jobs Table
+//
 export const jobs = pgTable("jobs", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -68,6 +74,9 @@ export const jobs = pgTable("jobs", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Applications Table
+//
 export const applications = pgTable("applications", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").notNull(),
@@ -80,6 +89,9 @@ export const applications = pgTable("applications", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Partners Table
+//
 export const partners = pgTable("partners", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -94,6 +106,9 @@ export const partners = pgTable("partners", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Testimonials Table
+//
 export const testimonials = pgTable("testimonials", {
   id: serial("id").primaryKey(),
   userId: integer("user_id").notNull(),
@@ -105,6 +120,9 @@ export const testimonials = pgTable("testimonials", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Blog Posts Table
+//
 export const blogPosts = pgTable("blog_posts", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -119,6 +137,9 @@ export const blogPosts = pgTable("blog_posts", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Team Members Table
+//
 export const teamMembers = pgTable("team_members", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
@@ -133,6 +154,9 @@ export const teamMembers = pgTable("team_members", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+//
+// Referrals Table
+//
 export const referrals = pgTable("referrals", {
   id: serial("id").primaryKey(),
   referrerId: integer("referrer_id").notNull(),
@@ -144,6 +168,9 @@ export const referrals = pgTable("referrals", {
   completedAt: timestamp("completed_at"),
 });
 
+//
+// Analytics Table
+//
 export const analytics = pgTable("analytics", {
   id: serial("id").primaryKey(),
   event: varchar("event", { length: 100 }).notNull(),
@@ -154,7 +181,9 @@ export const analytics = pgTable("analytics", {
   timestamp: timestamp("timestamp").defaultNow(),
 });
 
+//
 // Relations
+//
 export const usersRelations = relations(users, ({ many }) => ({
   applications: many(applications),
   testimonials: many(testimonials),
@@ -216,7 +245,9 @@ export const analyticsRelations = relations(analytics, ({ one }) => ({
   }),
 }));
 
-// Insert schemas
+//
+// Insert Schemas
+//
 export const insertUserSchema = createInsertSchema(users).omit({
   id: true,
   createdAt: true,
@@ -276,24 +307,35 @@ export const insertAnalyticsSchema = createInsertSchema(analytics).omit({
   timestamp: true,
 });
 
+//
 // Types
+//
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
+
 export type Scholarship = typeof scholarships.$inferSelect;
 export type InsertScholarship = z.infer<typeof insertScholarshipSchema>;
+
 export type Job = typeof jobs.$inferSelect;
 export type InsertJob = z.infer<typeof insertJobSchema>;
+
 export type Application = typeof applications.$inferSelect;
 export type InsertApplication = z.infer<typeof insertApplicationSchema>;
+
 export type Partner = typeof partners.$inferSelect;
 export type InsertPartner = z.infer<typeof insertPartnerSchema>;
+
 export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
+
 export type BlogPost = typeof blogPosts.$inferSelect;
 export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+
 export type TeamMember = typeof teamMembers.$inferSelect;
 export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
+
 export type Referral = typeof referrals.$inferSelect;
 export type InsertReferral = z.infer<typeof insertReferralSchema>;
+
 export type Analytics = typeof analytics.$inferSelect;
 export type InsertAnalytics = z.infer<typeof insertAnalyticsSchema>;
