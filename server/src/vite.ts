@@ -6,9 +6,10 @@ import path from "path";
 let vite: ViteDevServer;
 
 export const setupVite = async (app: Express, server: Server) => {
-  const { createServer } = await import("vite");
+  const viteModule = await import("vite");
+  const createViteServer = viteModule.default?.createServer || viteModule.createServer;
 
-  vite = await createServer({
+  vite = await createViteServer({
     server: { middlewareMode: true },
     root: path.resolve(__dirname, "../../client"),
     appType: "custom",
