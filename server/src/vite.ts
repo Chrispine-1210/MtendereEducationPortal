@@ -2,12 +2,17 @@ import type { Express } from "express";
 import type { Server } from "http";
 import type { ViteDevServer } from "vite";
 import path from "path";
+import { error } from "console";
 
 let vite: ViteDevServer;
 
 export const setupVite = async (app: Express, server: Server) => {
   const viteModule = await import("vite");
-  const createViteServer = viteModule.default?.createServer || viteModule.createServer;
+  const createViteServer = viteModule.createServer || viteModule.createServer;
+
+  if (!createViteServer) {
+    throw new error ("createServer not found in vite Module import");
+  }
 
   vite = await createViteServer({
     server: { middlewareMode: true },
