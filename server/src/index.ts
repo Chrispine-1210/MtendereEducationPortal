@@ -1,42 +1,58 @@
+// server/src/index.ts
+
 import "dotenv/config";
-import express from "express";
-import session from "express-session";
-import passport from "passport";
+import express, { Request, Response, NextFunction } from "express";
 import http from "http";
-
-
 import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
-import { initWebSocket } from "./modules/websocket/socket"; // Updated import
-import errorHandler from "./middleware/errorHandler";
-
 
 const app = express();
-
+const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+/**
+ * Logging middleware for API routes
+ */
+app.use((req, res, next) => {
+  const start = Date.now();
+  const path = req.path;
+  let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-app.use(session({
-  secret: process.env.SESSION_SECRET || "secret",
-  resave: false,
-  saveUninitialized: false
-}));
+  const originalResJson = res.json;
+  res.json = function (bodyJson, ...args) {
+    capturedJsonResponse = bodyJson;
+    return originalResJson.apply(res, [bodyJson, ...args]);
+  };
 
+  res.on("finish", () => {
+    const duration = Date.now() - start;
+    if (path.startsWith("/api")) {
+      let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
+      if (capturedJsonResponse) {
+        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+      }
+      if (logLine.length > 80) {
+        logLine = logLine.slice(0, 79) + "…";
+      }
+      log(logLine);
+    }
+  });
 
-app.use(passport.initialize());
-app.use(passport.session());
+  next();
+});
 
-
-// Register routes and error handler
 (async () => {
-  await registerRoutes(app);
-  app.use(errorHandler);
+  await registerRoutes(app, server); // Pass server for websocket init if needed
 
-
-  const server = http.createServer(app);
-
+  // Global error handler
+  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+    const status = err.status || err.statusCode || 500;
+    const message = err.message || "Internal Server Error";
+    res.status(status).json({ message });
+    throw err;
+  });
 
   if (app.get("env") === "development") {
     await setupVite(app, server);
@@ -44,13 +60,15 @@ app.use(passport.session());
     serveStatic(app);
   }
 
-
   const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
-  server.listen(port, "0.0.0.0", () => {
-    log(`Server running on port ${port}`);
-  });
-
-
-  initWebSocket(server); // Initialize Socket.IO with the HTTP server
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true,
+    },
+    () => {
+      log(`🚀 Server running on port ${port}`);
+    }
+  );
 })();
-
