@@ -1,6 +1,3 @@
-export class AnalyticsService {
-  static async getAnalytics() {
-    // Placeholder: fetch analytics data
-    return [];
-  }
-}
+export const sampleService = async () => {
+  return { message: "Sample service logic for analytics module" };
+};

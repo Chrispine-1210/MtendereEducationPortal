@@ -1,8 +1,8 @@
-import express from "express";
-import { AnalyticsController } from "./analytics.controller";
+import { Router } from "express";
+import { sampleController } from "./analytics.controller";
 
-const router = express.Router();
+const router = Router();
 
-router.get("/", AnalyticsController.getAnalytics);
+router.get("/", sampleController);
 
 export default router;

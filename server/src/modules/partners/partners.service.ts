@@ -1,7 +1,3 @@
-export const sampleService = async (): Promise<string> => {
-  try {
-    return 'Sample service logic here';
-  } catch (error) {
-    throw error;
-  }
+export const sampleService = async () => {
+  return { message: "Sample service logic for partners module" };
 };

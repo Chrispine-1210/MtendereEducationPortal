@@ -1,10 +1,5 @@
-import { Request, Response } from 'express';
-import { NextFunction } from 'express';
+import { Request, Response } from "express";
 
-export const sampleController = (req: Request, res: Response, next: NextFunction) => {
-  try {
-    res.status(200).json({ message: 'Sample controller working' });
-  } catch (error) {
-    next(error);
-  }
+export const sampleController = async (req: Request, res: Response) => {
+  res.json({ message: "Sample controller in testimonials module" });
 };

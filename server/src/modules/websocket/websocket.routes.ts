@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { sampleController } from "./partners.controller";
+import { sampleController } from "./websocket.controller";
 
 const router = Router();
 

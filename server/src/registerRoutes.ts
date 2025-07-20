@@ -7,7 +7,7 @@ export const registerRoutes = async (app: Express) => {
   const moduleDirs = fs.readdirSync(modulesPath);
 
   for (const moduleName of moduleDirs) {
-    const routeFileName = `${moduleName}.routes.ts`; // or .js if compiled
+    const routeFileName = `${moduleName}.routes.ts`; // adjust to .js if compiled
     const routeFilePath = path.join(modulesPath, moduleName, routeFileName);
 
     if (fs.existsSync(routeFilePath)) {

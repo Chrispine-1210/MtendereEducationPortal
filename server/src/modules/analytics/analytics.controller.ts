@@ -1,8 +1,5 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 
-export class AnalyticsController {
-  static async getAnalytics(req: Request, res: Response, next: NextFunction) {
-    // Placeholder: return analytics data
-    res.json({ analytics: [] });
-  }
-}
+export const sampleController = async (req: Request, res: Response) => {
+  res.json({ message: "Sample controller in analytics module" });
+};
