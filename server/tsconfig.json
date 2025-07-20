@@ -1,6 +1,11 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "paths": {
+      "@middleware/*": ["middleware/*"],
+      "shared/*": ["shared/*"],
+      "modules/*": ["modules/*"]
+    },
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
