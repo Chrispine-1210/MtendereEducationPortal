@@ -1,9 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2022",                         // Modern async/await + top-level await
-    "module": "ESNext",                         // Required for native ESM
-    "moduleResolution": "bundler",              // ✅ Modern resolution (requires extensions!)
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "rootDir": "./src",
     "outDir": "./dist",
     "strict": true,
@@ -11,57 +11,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["node", "express"],               // Good for typed req/res
-    "typeRoots": ["./node_modules/@types", "./types/express/index.d.ts"],
+    "types": ["node", "express"],
+    "typeRoots": ["./node_modules/@types", "./types"],
     "noImplicitAny": false,
     "sourceMap": true
   },
   "include": ["src/**/*", "ai.ts", "types/**/*"],
   "exclude": ["node_modules", "dist"]
 }
-
-// package.json additions 
-{ 
-  "type": "module", 
-  "scripts": { 
-    "dev": "ts-node-dev --respawn ./src/index.ts",
-    "build": "tsup src/index.ts --format esm --out-dir dist --clean",
-    "start": "node dist/index.js" 
-  },
-  "devDependencies": { 
-    "tsup": "^7.2.0" 
-  } 
-}
-
-// PM2 config: ecosystem.config.cjs 
-module.exports = { 
-  apps: [
-    { 
-      name: 'mtendere-backend', 
-      script: './dist/index.js',
-      instances: 'max',
-      exec_mode: 'cluster',
-      env: { 
-        NODE_ENV: 'production'
-      }
-    }
-  ] 
-};
-
-// Dockerfile 
-FROM node:20-alpine 
-WORKDIR /app 
-COPY . . 
-RUN npm install && npm run build 
-EXPOSE 5000 CMD 
-["node", "dist/index.js"]
-
-// .dockerignore 
-node_modules 
-dist 
-*.log 
-.env
-
-// .nvmrc 
-20.11.1
-
