@@ -1,26 +1,36 @@
-
 import { Express } from "express";
-import userRouter from "./modules/users/user.routes";
-import courseRouter from "./modules/courses/course.routes";
-import jobRouter from "./modules/jobs/job.routes";
-import applicationRouter from "./modules/applications/application.routes";
-// import scholarshipRouter from "./modules/scholarships/scholarship.routes";
-// import partnerRouter from "./modules/partners/partner.routes";
-// import testimonialRouter from "./modules/testimonials/testimonial.routes";
+import fs from "fs";
+import path from "path";
 
 export const registerRoutes = async (app: Express) => {
-  app.use("/api/users", userRouter);
-  app.use("/api/courses", courseRouter);
-  app.use("/api/jobs", jobRouter);
-  app.use("/api/applications", applicationRouter);
-  // app.use("/api/scholarships", scholarshipRouter);
-  // app.use("/api/partners", partnerRouter);
-  // app.use("/api/testimonials", testimonialRouter);
+  const modulesPath = path.join(__dirname, "modules");
+  const moduleDirs = fs.readdirSync(modulesPath);
 
-  // Health check
+  for (const moduleName of moduleDirs) {
+    const routeFileName = `${moduleName}.routes.ts`; // or .js if compiled
+    const routeFilePath = path.join(modulesPath, moduleName, routeFileName);
+
+    if (fs.existsSync(routeFilePath)) {
+      try {
+        const routeModule = await import(routeFilePath);
+        const router = routeModule.default;
+
+        if (router) {
+          app.use(`/api/${moduleName}`, router);
+          console.log(`✅ Loaded routes for /api/${moduleName}`);
+        } else {
+          console.warn(`⚠️ No default export found in ${routeFileName}`);
+        }
+      } catch (err) {
+        console.error(`❌ Failed to load ${routeFileName}:`, err);
+      }
+    } else {
+      console.warn(`⚠️ Route file not found: ${routeFilePath}`);
+    }
+  }
+
+  // Health check route
   app.get("/api/health", (_req, res) => {
     res.json({ status: "ok", time: new Date().toISOString() });
   });
 };
-
-

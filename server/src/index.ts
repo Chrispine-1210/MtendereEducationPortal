@@ -1,29 +1,27 @@
 import "dotenv/config";
-import express, { type Request, Response, NextFunction } from "express";
+import express from "express";
 import session from "express-session";
 import passport from "passport";
-import routes from "./routes/routes";
+import http from "http";
+
 import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
-import { setupWebSocket } from './websocket';
 import { initWebSocket } from "./modules/websocket/socket";
-import http from 'http';
+import { errorHandler } from "./middleware/errorHandler";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// ✅ Session and Passport middleware setup at the top level
 app.use(session({
-  secret: "secret",
+  secret: process.env.SESSION_SECRET || "secret",
   resave: false,
   saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/api", routes);
 
-// ✅ Logging middleware
+// Logging middleware (unchanged)
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -56,8 +54,6 @@ const server = http.createServer(app);
 
 (async () => {
   await registerRoutes(app);
-
-  // Use centralized error handler middleware
   app.use(errorHandler);
 
   if (app.get("env") === "development") {
@@ -67,12 +63,8 @@ const server = http.createServer(app);
   }
 
   const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
-    log(`serving on port ${port}`);
+  server.listen(port, "0.0.0.0", () => {
+    log(`Server running on port ${port}`);
   });
 
   initWebSocket(server);
