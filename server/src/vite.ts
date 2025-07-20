@@ -1,17 +1,14 @@
-// server/src/vite.ts
-
-import { Express } from "express";
-import { createServer as createViteServer, ViteDevServer } from "vite";
+import type { Express } from "express";
 import type { Server } from "http";
+import type { ViteDevServer } from "vite";
 import path from "path";
 
 let vite: ViteDevServer;
 
-/**
- * Setup Vite middleware in development
- */
 export const setupVite = async (app: Express, server: Server) => {
-  vite = await createViteServer({
+  const { createServer } = await import("vite");
+
+  vite = await createServer({
     server: { middlewareMode: true },
     root: path.resolve(__dirname, "../../client"),
     appType: "custom",
@@ -23,21 +20,3 @@ export const setupVite = async (app: Express, server: Server) => {
     if (vite) await vite.close();
   });
 };
-
-/**
- * Serve static files in production
- */
-export const serveStatic = (app: Express) => {
-  const root = path.resolve(__dirname, "../../client/dist");
-  app.use(express.static(root));
-
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(root, "index.html"));
-  });
-};
-
-/**
- * Simple log utility
- */
-export const log = console.log;
-
