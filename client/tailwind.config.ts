@@ -8,7 +8,11 @@ const config: Config = {
     "../shared/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['inter', 'ui-sans-serif', 'system-ui'],
+      },
+    },
   },
   plugins: [],
 };
