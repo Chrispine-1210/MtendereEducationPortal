@@ -5,7 +5,7 @@ const config: Config = {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "../shared/**/*.{js,ts,jsx,tsx}"
+    "../shared/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
