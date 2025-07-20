@@ -10,6 +10,7 @@
     "start": "node dist/index.js"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.6",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.1.4",
