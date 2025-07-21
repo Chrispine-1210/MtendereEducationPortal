@@ -2,6 +2,7 @@ import type { Express } from "express";
 import type { Server } from "http";
 import type { ViteDevServer } from "vite";
 import path from "path";
+import {createServer as createServer} from "vite";
 import { error } from "console";
 
 let vite: ViteDevServer;
