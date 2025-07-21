@@ -27,4 +27,6 @@ export const setupVite = async (app: Express, server: Server) => {
   server.on("close", async () => {
     if (vite) await vite.close();
   });
+
+  console.log(createServer);
 };
