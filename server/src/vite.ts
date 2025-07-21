@@ -9,7 +9,7 @@ let vite: ViteDevServer;
 
 export const setupVite = async (app: Express, server: Server) => {
   const viteModule = await import("vite");
-  console.log(viteModule:), viteModule;
+  console.log(viteModule), viteModule;
   const createViteServer = viteModule.createServer;
 
   if (!createServer) {
