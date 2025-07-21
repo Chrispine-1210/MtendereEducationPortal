@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "private": true,
-  "type": "commonjs",
+  "type": "module",
   "module": "ESNext",
   "scripts": {
     "dev": "tsx watch ./src/index.ts",
