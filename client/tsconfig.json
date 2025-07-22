@@ -4,6 +4,8 @@
         "composite": true,
         "noEmit": true,
         "baseUrl": ".",
+        "outDir": "./dist",
+        "rootDir": "./src",
         "paths": {
             "@/*": [
                 "src/*"
