@@ -10,7 +10,7 @@ let vite: ViteDevServer;
 export const setupVite = async (app: Express, server: Server) => {
   const viteModule = await import("vite");
   console.log(viteModule), viteModule;
-  const createViteServer = viteModule.createServer;
+  const createViteServer = viteModule.default.createServer;
 
   if (!createServer) {
     throw new Error ("createServer is not found in vite Module import");
@@ -29,4 +29,6 @@ export const setupVite = async (app: Express, server: Server) => {
   });
 
   console.log(createServer);
+
+  
 };
