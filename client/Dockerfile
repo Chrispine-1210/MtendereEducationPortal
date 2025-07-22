@@ -6,12 +6,14 @@ FROM node:20-slim AS build
 # Set working directory
 WORKDIR /app
 
+COPY tsconfig.json ./
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
 
 # Copy all source code
-COPY . .
+COPY client .
 
 # Build the app for production
 RUN npm run build
