@@ -24,11 +24,7 @@ export default defineConfig({
       less: {
         math: 'parens-division',
       },
-      styl:  {
-        define: {
-          $specialColor: new styleText.nodes.RGBA(51, 197, 255, 1),
-        },
-      },
+
       scss:{
         importers: [
           './postcss.config.cjs'
