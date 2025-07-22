@@ -3,7 +3,6 @@ import type { Server } from "http";
 import type { ViteDevServer } from "vite";
 import path from "path";
 import {createServer as createServer} from "vite";
-import { throws } from "assert";
 
 let vite: ViteDevServer;
 
@@ -29,6 +28,4 @@ export const setupVite = async (app: Express, server: Server) => {
   });
 
   console.log(createServer);
-
-  
 };
