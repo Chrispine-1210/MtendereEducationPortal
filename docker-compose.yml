@@ -18,7 +18,8 @@ services:
 
   backend:
     build:
-      context: .
+      context: ./server
+      dockerfile: Dockerfile
     container_name: mtendere-app
     ports:
       - "3000:3000"
