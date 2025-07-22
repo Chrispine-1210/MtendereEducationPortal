@@ -21,6 +21,6 @@
     "noImplicitAny": false,
     "sourceMap": true
   },
-  "include": ["src/**/*", "ai.ts", "types/**/*"],
+  "include": ["src/**/*", "src/ai.ts", "types/**/*"],
   "exclude": ["node_modules", "dist"]
 }
