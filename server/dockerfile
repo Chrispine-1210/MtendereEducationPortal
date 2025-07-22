@@ -6,7 +6,7 @@ WORKDIR /app/server
 COPY tsconfig.json /app/client/tsconfig.base.json
 
 # Copy package files first
-COPY server/package.json ./
+COPY package.json ./
 
 # Install all dependencies (including dev for build)
 RUN npm install
