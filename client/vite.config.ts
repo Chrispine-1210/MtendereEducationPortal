@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, createServer } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { Server } from 'http';
@@ -35,7 +35,7 @@ export default defineConfig({
         ],
         additionalData: '$injectedColor: orange;',
       },
-    },
+    }
   },
   
   server: {
