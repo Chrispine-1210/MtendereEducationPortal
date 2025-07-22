@@ -4,7 +4,7 @@ FROM node:20-slim AS build
 WORKDIR /app/client
 
 # Copy root tsconfig.json to /app/tsconfig.json
-COPY tsconfig.json /app/client/tsconfig.base.json
+COPY tsconfig.json /app/client/tsconfig.json
 
 # Copy client package.json files
 COPY client/package*.json ./
