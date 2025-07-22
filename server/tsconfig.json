@@ -1,10 +1,11 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": "./src",
     "paths": {
-      "@middleware/*": ["src/middleware/middleware/*"],
-      "shared/*": ["shared/*"],
-      "modules/*": ["modules/*"]
+      "@middleware/*": ["./src/middleware"],
+      "shared/*": ["../shared"],
+      "modules/*": ["./src/modules"]
     },
     "target": "ES2022",
     "module": "ESNext",
