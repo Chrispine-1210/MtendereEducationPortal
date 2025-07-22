@@ -1,21 +1,21 @@
-# ==============================
-# Stage 1: Build the application
-# ==============================
 FROM node:20-slim AS build
 
-# Set working directory
-WORKDIR /app
+# Set working directory to /app/client
+WORKDIR /app/client
 
-COPY tsconfig.json ./
+# Copy root tsconfig.json to /app/tsconfig.json
+COPY tsconfig.json /app/tsconfig.json
+
+# Copy client package.json files
+COPY client/package*.json ./
 
 # Install dependencies
-COPY package*.json ./
 RUN npm install
 
-# Copy all source code
+# Copy client source files
 COPY client .
 
-# Build the app for production
+# Build the app
 RUN npm run build
 
 
@@ -28,14 +28,8 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy build output from previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/client/dist /usr/share/nginx/html
 
-# Copy custom nginx config if needed (optional)
-# COPY nginx.conf /etc/nginx/nginx.conf
-
-# Expose port 80
 EXPOSE 80
-
-# Start nginx server
 CMD ["nginx", "-g", "daemon off;"]
 
