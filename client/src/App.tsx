@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import React from "react";
+import { BrowserRouter as Router, Routes } from "react-router-dom";
+import { useState } from 'react';
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
