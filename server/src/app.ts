@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import testimonialRoutes from "./modules/testimonials/testimonials.routes";
 import userRoutes from "./modules/users/users.routes";
 import courseRoutes from "./modules/courses/courses.routes";
+import jobRoutes from "./modules/jobs/jobs.routes";
+
 
 dotenv.config();
 
@@ -16,5 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/courses", courseRoutes);
+app.use("/api/jobs", jobRoutes);
 
 export default app;
