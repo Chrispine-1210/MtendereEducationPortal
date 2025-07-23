@@ -18,11 +18,11 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "types": ["node", "express"],
-    "typeRoots": ["./node_modules/@types", "./types"],
+    "typeRoots": ["./node_modules/@types", "src/types"],
     "noImplicitAny": false,
     "sourceMap": true
   },
-  "include": ["src/**/*", "src/ai.ts", "types/**/*"],
+  "include": ["src/**/*", "src/ai.ts", "src/types/**/*"],
   "exclude": ["node_modules", "dist"]
 }
 
