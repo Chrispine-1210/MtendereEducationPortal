@@ -1,4 +1,4 @@
-server / src / middleware / uploadMiddleware.ts
+//server / src / middleware / uploadMiddleware.ts
 import multer from "multer";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { s3 } from "../config/s3";
