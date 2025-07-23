@@ -1,8 +1,11 @@
-import { Router } from "express";
-import { sampleController } from "./testimonials.controller";
+import express from "express";
+import * as testimonialController from "./testimonials.controller";
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", sampleController);
+router.get("/", testimonialController.getTestimonials);
+router.post("/", testimonialController.createTestimonial);
+router.put("/:id", testimonialController.updateTestimonial);
+router.delete("/:id", testimonialController.deleteTestimonial);
 
 export default router;
