@@ -61,6 +61,7 @@
     "@types/node": "^24.1.0",
     "@types/passport": "^1.0.17",
     "@types/pg": "^8.15.4",
+    "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",
     "autoprefixer": "^10.4.21",
     "concurrently": "^8.2.2",
