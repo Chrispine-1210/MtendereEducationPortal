@@ -1,3 +1,4 @@
+import { BrowseRouter as Router } from "react-dom";
 import React from "react";
 import { useState } from 'react';
 import { Switch, Route } from "wouter";
