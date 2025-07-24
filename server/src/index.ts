@@ -1,5 +1,3 @@
-// server/src/index.ts
-
 import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import http from "http";
@@ -12,9 +10,6 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-/**
- * Logging middleware for API routes
- */
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -43,32 +38,31 @@ app.use((req, res, next) => {
   next();
 });
 
-(async () => {
-  await registerRoutes(app, server); // Pass server for websocket init if needed
+async function startServer() {
+  try {
+    await registerRoutes(app, server);
 
-  // Global error handler
-  app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(status).json({ message });
-    throw err;
-  });
-
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
-
-  const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
-  server.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
-      log(`🚀 Server running on port ${port}`);
+    if (process.env.NODE_ENV === "development") {
+      await setupVite(app, server);
+    } else {
+      serveStatic(app);
     }
-  );
-})();
+
+    // Global error handler
+    app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+      const status = err.status || err.statusCode || 500;
+      const message = err.message || "Internal Server Error";
+      res.status(status).json({ message });
+    });
+
+    const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
+    server.listen(port, "0.0.0.0", () => {
+      log(`Server running on http://localhost:${port}`);
+    });
+  } catch (err) {
+    console.error("Fatal server startup error:", err);
+    process.exit(1);
+  }
+}
+
+startServer();
