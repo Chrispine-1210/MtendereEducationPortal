@@ -7,6 +7,10 @@ import ContentManager from "@/components/admin/content-manager";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Routes, Route, Link } from "react-router-dom";
+import AdminTestimonials from "../components/admin/AdminTestimonials";
+import AdminCourses from "../components/admin/AdminCourses";
+import AdminJobs from "../components/admin/AdminJobs";
 import { useQuery } from "@tanstack/react-query";
 import { 
   Users, 
