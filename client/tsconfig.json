@@ -1,9 +1,4 @@
 {
-    "files": [],
-    "references": [
-        { "path": "./tsconfig.app.json" },
-        { "path": "./tsconfig.node.json" },
-    ],
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "composite": true,
@@ -13,15 +8,15 @@
         "rootDir": "./src",
         "paths": {
             "@/*": [
-                "src/*"
+                "src/*",
             ],
             "@shared/*": [
-                "../shared/*"
+                "../shared/*",
             ],
             "@assets/*": [
-                "../attached_assets/*"
-            ]
-        }
+                "../attached_assets/*",
+            ],
+        },
     },
     "include": [
         "src/**/*"
