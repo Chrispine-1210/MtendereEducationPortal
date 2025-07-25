@@ -19,6 +19,7 @@ import About from "@/pages/about";
 import Contact from "@/pages/contact";
 import AIChat from "@/components/ai-chat";
 import BackToTop from "@/components/back-to-top";
+import Applications from "./pages/Applications";
 
 function Router() {
   return (
@@ -34,6 +35,8 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
+      <Route path="/applications" element={<Applications />} />
+
     </Switch>
   );
 }
