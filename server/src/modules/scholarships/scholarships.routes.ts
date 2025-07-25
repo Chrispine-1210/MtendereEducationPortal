@@ -1,8 +1,11 @@
-import { Router } from "express";
-import { sampleController } from "./scholarships.controller";
+import express from "express";
+import * as scholarshipController from "./scholarships.controller";
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", sampleController);
+router.get("/", scholarshipController.getScholarships);
+router.post("/", scholarshipController.createScholarship);
+router.put("/:id", scholarshipController.updateScholarship);
+router.delete("/:id", scholarshipController.deleteScholarship);
 
 export default router;
