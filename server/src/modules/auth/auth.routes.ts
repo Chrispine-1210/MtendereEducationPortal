@@ -1,8 +1,11 @@
-import { Router } from "express";
-import { sampleController } from "./auth.controller";
+import express from "express";
+import * as authController from "./auth.controller";
+import { protect } from "../../middleware/authMiddleware";
 
-const router = Router();
+const router = express.Router();
 
-router.get("/", sampleController);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.get("/profile", protect, authController.profile);
 
 export default router;

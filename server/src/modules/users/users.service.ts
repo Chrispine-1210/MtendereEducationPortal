@@ -29,3 +29,11 @@ export const loginUser = async (email: string, password: string) => {
   const token = generateToken(user.id, user.role);
   return { ...user, token };
 };
+
+export const getAllUsers = () => db.select().from(users);
+
+export const updateUser = (id: number, data: any) =>
+  db.update(users).set(data).where(eq(users.id, id)).returning();
+
+export const deleteUser = (id: number) =>
+  db.delete(users).where(eq(users.id, id)).returning();

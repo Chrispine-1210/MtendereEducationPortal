@@ -9,7 +9,7 @@ import jobRoutes from "./modules/jobs/jobs.routes";
 import partnerRoutes from "./modules/partners/partners.routes";
 import scholarshipRoutes from "./modules/scholarships/scholarships.routes";
 import applicationRoutes from "./modules/applications/applications.routes";
-
+import authRoutes from "./modules/auth/auth.routes";
 
 dotenv.config();
 
@@ -25,5 +25,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/partners", partnerRoutes);
 app.use("/api/scholarships", scholarshipRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/auth", authRoutes);
+
 
 export default app;

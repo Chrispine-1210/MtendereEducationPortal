@@ -20,3 +20,21 @@ export const login = async (req: Request, res: Response) => {
     res.status(401).json({ message: error.message });
   }
 };
+
+export const getUsers = async (req: Request, res: Response) => {
+  const users = await userService.getAllUsers();
+  res.json(users);
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = await userService.updateUser(parseInt(id), req.body);
+  res.json(data);
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const data = await userService.deleteUser(parseInt(id));
+  res.json(data);
+};
+
