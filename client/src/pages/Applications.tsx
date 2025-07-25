@@ -1,4 +1,3 @@
-import React from "react";
 import ApplicationsForm from "../components/applications/ApplicationsForm";
 import ApplicationsList from "../components/applications/ApplicationsList";
 
