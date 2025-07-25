@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const Table = React.forwardRef<
   HTMLTableElement,
@@ -13,7 +13,7 @@ const Table = React.forwardRef<
       {...props}
     />
   </div>
-))
+));
 Table.displayName = "Table"
 
 const TableHeader = React.forwardRef<
