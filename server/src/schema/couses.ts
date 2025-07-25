@@ -5,6 +5,6 @@ export const courses = pgTable("courses", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   imageUrl: text("image_url"),
-  link: text("link"),
+  content: text("content"), // for rich WYSIWYG HTML
   createdAt: timestamp("created_at").defaultNow(),
 });
