@@ -33,8 +33,8 @@ const toastVariants = cva(
       },
     },
     defaultVariants: {
-      variant: "default",
-    },
+      variant: "default"
+    }
   }
 )
 
@@ -50,7 +50,7 @@ const Toast = React.forwardRef<
       {...props}
     />
   )
-});
+})
 Toast.displayName = ToastPrimitives.Root.displayName
 
 const ToastAction = React.forwardRef<
@@ -65,7 +65,7 @@ const ToastAction = React.forwardRef<
     )}
     {...props}
   />
-));
+))
 ToastAction.displayName = ToastPrimitives.Action.displayName
 
 const ToastClose = React.forwardRef<
@@ -95,7 +95,7 @@ const ToastTitle = React.forwardRef<
     className={cn("text-sm font-semibold", className)}
     {...props}
   />
-));
+))
 ToastTitle.displayName = ToastPrimitives.Title.displayName
 
 const ToastDescription = React.forwardRef<
