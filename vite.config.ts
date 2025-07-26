@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import { createServer } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
 
@@ -22,7 +21,8 @@ export default defineConfig({
     port: 5000,
     open: true,
     proxy: {
-      './api': 'http//localhost:5000',
-    },
+      '/api': 'http://localhost:3000', // Make sure backend is running on this port
+    }
   }
 });
+
