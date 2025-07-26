@@ -33,7 +33,7 @@ export default defineConfig({
       },
     }
   },
-  
+
   root: path.resolve(__dirname),
   build: {
     ssrManifest: true,
@@ -44,4 +44,3 @@ export default defineConfig({
     emptyOutDir: true,
   },
 });
-

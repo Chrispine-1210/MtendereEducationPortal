@@ -6,8 +6,9 @@
   "module": "ESNext",
   "scripts": {
     "dev": "tsx watch ./src/index.ts",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "build": "tsc vite build --config client/vite.config.ts && vite build --ssr client/entry-server.tsx",
+    "start": "node dist/index.js",
+    "preview": "node dist/server/entry-server.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.850.0",
