@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import type { Server } from "http";
-import { createServer as createViteServer, ViteDevServer } from "vite";
+import { ViteDevServer } from "vite";
 import path from "path";
 import fs from "fs";
 import express from "express";
