@@ -1,13 +1,13 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
-import App from "./src/App"; // adjust to match your structure
+import App from "../../client/src/App"
 import { StaticRouter } from "react-router-dom/server";
 
 export function render(url: string) {
   return renderToString(
-    <StaticRouter location={url}>
+    <Router>
       <App />
-    </StaticRouter>
+    </Router>
   );
 }
 

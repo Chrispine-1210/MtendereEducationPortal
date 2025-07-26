@@ -1,6 +1,7 @@
 import { Express } from "express";
 import fs from "fs";
 import path from "path";
+import userRoutes from './modules/users/users.routes'
 
 export const registerRoutes = async (app: Express) => {
   const modulesPath = path.join(__dirname, "modules");
@@ -16,7 +17,7 @@ export const registerRoutes = async (app: Express) => {
         const router = routeModule.default;
 
         if (router) {
-          app.use(`/api/${moduleName}`, router);
+          app.use(`/modules`, router);
           console.log(`✅ Loaded routes for /api/${moduleName}`);
         } else {
           console.warn(`⚠️ No default export found in ${routeFileName}`);
