@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchApplications, deleteApplication } from "../../lib/applications";
+import { fetchApplications, deleteApplication } from "../../api/applications";
 
 const ApplicationsList = () => {
     const [applications, setApplications] = useState([]);

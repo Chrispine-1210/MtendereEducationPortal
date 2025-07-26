@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createApplication } from "../../lib/applications";
+import { createApplication } from "../../api/applications";
 
 const ApplicationsForm = () => {
     const [jobId, setJobId] = useState("");

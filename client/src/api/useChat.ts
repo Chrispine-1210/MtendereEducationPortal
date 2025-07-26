@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import socket from '@/lib/socket';
+import socket from '@/api/socket';
 import { SocketAddress } from 'net';
 
 const useChat = () => {
