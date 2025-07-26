@@ -1,7 +1,7 @@
 import express from "express";
 import * as applicationController from "./applications.controller";
 import { upload } from "../../middleware/upload";
-import { protect, admin } from "../../middleware/auth";
+import { protect, admin } from "../../middleware/authMiddleware";
 
 const router = express.Router();
 

@@ -18,14 +18,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api/testimonials", testimonialRoutes);
-app.use("/api/users", userRoutes);
-app.use("/api/courses", courseRoutes);
-app.use("/api/jobs", jobRoutes);
-app.use("/api/partners", partnerRoutes);
-app.use("/api/scholarships", scholarshipRoutes);
-app.use("/api/applications", applicationRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/modules/testimonials", testimonialRoutes);
+app.use("/modules/users", userRoutes);
+app.use("/modules/courses", courseRoutes);
+app.use("/modules/jobs", jobRoutes);
+app.use("/modules/partners", partnerRoutes);
+app.use("/modules/scholarships", scholarshipRoutes);
+app.use("/modules/applications", applicationRoutes);
+app.use("/modules/auth", authRoutes);
 
 
 export default app;
