@@ -10,6 +10,15 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared')
     }
   },
+  root: path.resolve(__dirname),
+  build: {
+    ssrManifest: true,
+    outDir: path.resolve(__dirname, '../dist/public'),
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html'),
+    },
+    emptyOutDir: true,
+  },
   css: {
     preprocessorOptions: {
       less: {
