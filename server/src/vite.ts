@@ -3,8 +3,6 @@ import path from "path";
 import express, { Express } from "express";
 import type { Server } from "http";
 import fs from "fs";
-import { createServer as createViteServer, ViteDevServer } from "vite";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
