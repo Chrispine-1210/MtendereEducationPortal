@@ -10,15 +10,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared')
     }
   },
-  root: path.resolve(__dirname),
-  build: {
-    ssrManifest: true,
-    outDir: path.resolve(__dirname, '../dist/public'),
-    rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
-    },
-    emptyOutDir: true,
-  },
+  
   css: {
     preprocessorOptions: {
       less: {
@@ -30,6 +22,7 @@ export default defineConfig({
       },
     }
   },
+
   server: {
     port: 5173,
     proxy: {
@@ -40,9 +33,15 @@ export default defineConfig({
       },
     }
   },
+  
+  root: path.resolve(__dirname),
   build: {
-    outDir: '../dist/client',
-    emptyOutDir: true
-  }
+    ssrManifest: true,
+    outDir: path.resolve(__dirname, '../dist/public'),
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html'),
+    },
+    emptyOutDir: true,
+  },
 });
 
