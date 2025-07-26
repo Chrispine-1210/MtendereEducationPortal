@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@middleware/*": ["./src/middleware"],
+      "@middleware/*": ["./src/middleware/authMiddleware"],
       "shared/*": ["../shared"],
       "modules/*": ["./src/modules"]
     },

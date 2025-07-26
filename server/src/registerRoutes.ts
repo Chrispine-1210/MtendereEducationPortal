@@ -1,7 +1,11 @@
+import { fileURLToPath } from "url";
+import path from "path";
 import { Express } from "express";
 import fs from "fs";
-import path from "path";
 import userRoutes from './modules/users/users.routes'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const registerRoutes = async (app: Express) => {
   const modulesPath = path.join(__dirname, "modules");
