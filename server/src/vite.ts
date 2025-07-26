@@ -1,15 +1,15 @@
-import type { Express } from "express";
-import type { Server } from "http";
-import { ViteDevServer } from "vite";
+import { fileURLToPath } from "url";
 import path from "path";
+import express, { Express } from "express";
+import type { Server } from "http";
 import fs from "fs";
-import express from "express";
+import { createServer as createViteServer, ViteDevServer } from "vite";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let vite: ViteDevServer | undefined;
 
-/**
- * Attach Vite dev middleware and SSR rendering in development
- */
 export async function setupVite(app: Express, server: Server) {
   vite = await createViteServer({
     server: { middlewareMode: true },
@@ -22,20 +22,14 @@ export async function setupVite(app: Express, server: Server) {
   app.use("*", async (req, res, next) => {
     try {
       const url = req.originalUrl;
-
-      // Load raw HTML
       let template = fs.readFileSync(
         path.resolve(__dirname, "../../client/index.html"),
         "utf-8"
       );
 
-      // Apply Vite HTML transforms (e.g., inject scripts)
       template = await vite.transformIndexHtml(url, template);
-
-      // SSR render
       const { render } = await vite.ssrLoadModule("/entry-server.tsx");
       const appHtml = render(url);
-
       const html = template.replace(`<!--app-html-->`, appHtml);
 
       res.status(200).set({ "Content-Type": "text/html" }).end(html);
@@ -50,9 +44,6 @@ export async function setupVite(app: Express, server: Server) {
   });
 }
 
-/**
- * Serve pre-rendered HTML and SSR module in production
- */
 export function serveStatic(app: Express) {
   const distPath = path.resolve(__dirname, "../../dist/public");
   const ssrModulePath = path.resolve(__dirname, "../../dist/server/entry-server.js");
@@ -78,10 +69,8 @@ export function serveStatic(app: Express) {
   });
 }
 
-/**
- * Scoped logger
- */
 export function log(message: string) {
   console.log(`[🌀 SSR] ${message}`);
 }
+
 
