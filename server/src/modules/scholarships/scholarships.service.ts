@@ -1,5 +1,5 @@
 import { db } from "../../config/db";
-import { scholarships } from "../../schema/scholarships";
+import { scholarships } from "../../api/scholarships";
 import { eq } from "drizzle-orm";
 
 export const getAllScholarships = () => db.select().from(scholarships);

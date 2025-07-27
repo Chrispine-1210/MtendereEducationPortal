@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { db } from "../../config/db";
-import { users } from "../../schema/users";
+import { users } from "../../api/users";
 import { eq } from "drizzle-orm";
 import * as testimonialService from "./testimonials.service";
 import { uploadToS3 } from "../../utils/s3";

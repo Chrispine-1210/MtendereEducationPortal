@@ -1,5 +1,5 @@
 import { db } from "../../config/db";
-import { jobs } from "../../schema/jobs";
+import { jobs } from "../../api/jobs";
 import { eq } from "drizzle-orm";
 
 export const getAllJobs = () => db.select().from(jobs);

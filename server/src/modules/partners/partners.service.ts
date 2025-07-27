@@ -1,5 +1,5 @@
 import { db } from "../../config/db";
-import { partners } from "../../schema/partners";
+import { partners } from "../../api/partners";
 import { eq } from "drizzle-orm";
 
 export const getAllPartners = () => db.select().from(partners);
