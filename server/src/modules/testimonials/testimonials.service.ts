@@ -1,5 +1,5 @@
 import { db } from "../../config/db";
-import { testimonials } from "../../api/testimonials";
+import { testimonials } from "../../schema/testimonials";
 import { eq } from "drizzle-orm";
 
 export const getAllTestimonials = () => db.select().from(testimonials);

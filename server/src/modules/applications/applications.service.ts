@@ -1,5 +1,5 @@
 import { db } from "../../config/db";
-import { applications } from "../../api/applications";
+import { applications } from "../../schema/applications";
 import { eq } from "drizzle-orm";
 
 export const getAllApplications = () => db.select().from(applications);
