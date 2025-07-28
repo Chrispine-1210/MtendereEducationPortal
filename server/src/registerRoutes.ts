@@ -2,7 +2,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import { Express } from "express";
 import fs from "fs";
-import userRoutes from './modules/users/users.routes'
+import userRoutes from './routes/users.routes'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

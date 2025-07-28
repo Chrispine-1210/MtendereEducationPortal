@@ -9,14 +9,14 @@ import { registerRoutes } from "./routes";
 import { requestLogger } from "./middleware/requestLogger";
 import dotenv from "dotenv";
 
-import testimonialRoutes from "./modules/testimonials/testimonials.routes";
-import userRoutes from "./modules/users/users.routes";
-import courseRoutes from "./modules/courses/courses.routes";
-import jobRoutes from "./modules/jobs/jobs.routes";
-import partnerRoutes from "./modules/partners/partners.routes";
-import scholarshipRoutes from "./modules/scholarships/scholarships.routes";
-import applicationRoutes from "./modules/applications/applications.routes";
-import authRoutes from "./modules/auth/auth.routes";
+import testimonialRoutes from "./routes/testimonials.routes";
+import userRoutes from "./routes/users.routes";
+import courseRoutes from "./routes/courses.routes";
+import jobRoutes from "./routes/jobs.routes";
+import partnerRoutes from "./routes/partners.routes";
+import scholarshipRoutes from "./routes/scholarships.routes";
+import applicationRoutes from "./routes/applications.routes";
+import authRoutes from "./routes/auth.routes";
 
 dotenv.config();
 
