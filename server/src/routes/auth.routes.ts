@@ -1,11 +1,18 @@
-import express from "express";
-import * as authController from "../controllers/auth.controller";
-import { protect } from "../middleware/authMiddleware";
+// src/routes/auth.routes.ts
+import { Router } from "express";
+import { AuthController } from "../controllers/auth.controller";
+import { validateRequest } from "../middleware/validateRequest";
+import { registerSchema, loginSchema } from "../validators/auth.validators";
 
-const router = express.Router();
+const router = Router();
 
-router.post("/register", authController.register);
-router.post("/login", authController.login);
-router.get("/profile", protect, authController.profile);
+// ✅ User Registration
+router.post("/register", validateRequest(registerSchema), AuthController.register);
+
+// ✅ User Login
+router.post("/login", validateRequest(loginSchema), AuthController.login);
+
+// ✅ Authenticated user check (optional)
+router.get("/me", AuthController.me);
 
 export default router;
