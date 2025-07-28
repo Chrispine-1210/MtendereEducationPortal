@@ -63,7 +63,7 @@ async function startServer() {
 
     const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 5000;
     server.listen(port, "0.0.0.0", () => {
-      log(`Server running on http://localhost:${port}`);
+      log(`Server running on http://localhost:${5000}`);
     });
   } catch (err) {
     console.error("Fatal server startup error:", err);
