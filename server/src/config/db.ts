@@ -1,4 +1,5 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
+import { sql } from 'drizzle-orm';
 import { Pool } from "pg";
 import { logger } from 'config/logger';
 
@@ -11,6 +12,6 @@ if (!process.env.DATABASE_URL) {
         "DATABASE_URL must be set. Did you forget to provision a database?",
     );
 }
-
+await db.execute(sql'SELECT 1');
 
 export const db = drizzle(pool);
