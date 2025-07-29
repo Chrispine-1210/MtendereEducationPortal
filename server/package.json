@@ -5,7 +5,7 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "nodemon src/server.ts",
+    "dev": "nodemon --watch src --ext ts,json --exec ts-node --project  src/server.ts",
     "build": "tsc",
     "start": "pm2-runtime ecosystem.config.mjs",
     "preview": "node dist/server/entry-server.ts"
