@@ -1,18 +1,45 @@
 import { db } from "../config/db";
-import { jobs } from "../schema/jobs";
+import { jobs } from "../models/jobs.model";
+import { cacheGet, cacheSet, cacheDelete } from "../utils/cache";
 import { eq } from "drizzle-orm";
 
-export const getAllJobs = () => db.select().from(jobs);
+export class JobsService {
+  static async getAllJobs() {
+    const cached = await cacheGet("jobs:all");
+    if (cached) return cached;
 
-export const getJobById = (id: number) =>
-  db.select().from(jobs).where(eq(jobs.id, id)).then(r => r[0]);
+    const allJobs = await db.select().from(jobs);
+    await cacheSet("jobs:all", allJobs, 300);
+    return allJobs;
+  }
 
-export const createJob = (data: any) =>
-  db.insert(jobs).values(data).returning();
+  static async getJobById(id: number) {
+    const cached = await cacheGet(`job:${id}`);
+    if (cached) return cached;
 
-export const updateJob = (id: number, data: any) =>
-  db.update(jobs).set(data).where(eq(jobs.id, id)).returning();
+    const job = await db.query.jobs.findFirst({ where: { id } });
+    if (!job) throw new Error("Job not found");
 
-export const deleteJob = (id: number) =>
-  db.delete(jobs).where(eq(jobs.id, id)).returning();
+    await cacheSet(`job:${id}`, job, 300);
+    return job;
+  }
 
+  static async createJob(data: typeof jobs.$inferInsert) {
+    const [newJob] = await db.insert(jobs).values(data).returning();
+    await cacheDelete("jobs:all");
+    return newJob;
+  }
+
+  static async updateJob(id: number, data: Partial<typeof jobs.$inferInsert>) {
+    const [updatedJob] = await db.update(jobs).set(data).where(eq(jobs.id, id)).returning();
+    await cacheDelete(`job:${id}`);
+    await cacheDelete("jobs:all");
+    return updatedJob;
+  }
+
+  static async deleteJob(id: number) {
+    await db.delete(jobs).where(eq(jobs.id, id));
+    await cacheDelete(`job:${id}`);
+    await cacheDelete("jobs:all");
+  }
+}

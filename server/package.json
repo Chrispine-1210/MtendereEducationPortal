@@ -5,9 +5,9 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "tsx watch ./src/index.ts",
+    "dev": "nodemon src/server.ts",
     "build": "tsc vite build --config client/vite.config.ts && vite build --ssr client/entry-server.tsx",
-    "start": "node dist/index.js",
+    "start": "pm2-runtime ecosystem.config.mjs",
     "preview": "node dist/server/entry-server.ts"
   },
   "dependencies": {

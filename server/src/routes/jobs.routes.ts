@@ -1,14 +1,22 @@
-import express from "express";
-import * as jobController from "../controllers/jobs.controller";
-import { upload } from "../middleware/upload";
-import { protect, admin } from "../middleware/authMiddleware";
+import { Router } from "express";
+import { JobsController } from "../controllers/jobs.controller";
+import { rateLimiter } from "../middleware/rateLimiter";
 
-const router = express.Router();
+const router = Router();
 
-router.get("/", jobController.getJobs);
-router.get("/:id", jobController.getJob);
-router.post("/", protect, admin, upload.single("image"), jobController.createJob);
-router.put("/:id", protect, admin, upload.single("image"), jobController.updateJob);
-router.delete("/:id", protect, admin, jobController.deleteJob);
+// ✅ List all jobs
+router.get("/", rateLimiter(200, 60), JobsController.getAllJobs);
+
+// ✅ Get job by ID
+router.get("/:id", JobsController.getJobById);
+
+// ✅ Create a new job
+router.post("/", JobsController.createJob);
+
+// ✅ Update a job
+router.put("/:id", JobsController.updateJob);
+
+// ✅ Delete a job
+router.delete("/:id", JobsController.deleteJob);
 
 export default router;

@@ -1,40 +1,78 @@
-import { Request, Response } from "express";
-import * as userService from "../services/users.service";
+// src/controllers/users.controller.ts
+import { Request, Response, NextFunction } from "express";
+import { UsersService } from "../services/users.service";
+import { handleResponse } from "../utils/response";
 
-export const register = async (req: Request, res: Response) => {
-  try {
-    const { name, email, password } = req.body;
-    const data = await userService.registerUser(name, email, password);
-    res.status(201).json(data);
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
+
+export class UsersController {
+  // ✅ Get all users
+  static async getAllUsers(req: Request, res: Response, next: NextFunction) {
+    try {
+      const users = await UsersService.getAllUsers();
+      return handleResponse(res, 200, "Users fetched successfully", users);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const login = async (req: Request, res: Response) => {
-  try {
-    const { email, password } = req.body;
-    const data = await userService.loginUser(email, password);
-    res.json(data);
-  } catch (error: any) {
-    res.status(401).json({ message: error.message });
+
+  // ✅ Get single user by ID
+  static async getUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const user = await UsersService.getUserById(id);
+      return handleResponse(res, 200, "User fetched successfully", user);
+    } catch (err) {
+      next(err);
+    }
   }
-};
 
-export const getUsers = async (req: Request, res: Response) => {
-  const users = await userService.getAllUsers();
-  res.json(users);
-};
 
-export const updateUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const data = await userService.updateUser(parseInt(id), req.body);
-  res.json(data);
-};
+  // ✅ Update a user
+  static async updateUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      const updated = await UsersService.updateUser(id, req.body);
+      return handleResponse(res, 200, "User updated successfully", updated);
+    } catch (err) {
+      next(err);
+    }
+  }
 
-export const deleteUser = async (req: Request, res: Response) => {
-  const { id } = req.params;
-  const data = await userService.deleteUser(parseInt(id));
-  res.json(data);
-};
+
+  // ✅ Delete a user
+  static async deleteUser(req: Request, res: Response, next: NextFunction) {
+    try {
+      const id = Number(req.params.id);
+      await UsersService.deleteUser(id);
+      return handleResponse(res, 200, "User deleted successfully");
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+  // ✅ Register new user
+  static async register(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { name, email, password } = req.body;
+      const data = await UsersService.registerUser(name, email, password);
+      return handleResponse(res, 201, "User registered successfully", data);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+
+  // ✅ Login user
+  static async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { email, password } = req.body;
+      const data = await UsersService.loginUser(email, password);
+      return handleResponse(res, 200, "Login successful", data);
+    } catch (err) {
+      next(err);
+    }
+  }
+}
 
