@@ -6,7 +6,7 @@
   "module": "ESNext",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "build": "tsc vite build --config client/vite.config.ts && vite build --ssr client/entry-server.tsx",
+    "build": "tsc",
     "start": "pm2-runtime ecosystem.config.mjs",
     "preview": "node dist/server/entry-server.ts"
   },
