@@ -4,7 +4,7 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "nodemon --watch src --ext ts,json --exec ts-node --project tsconfig.json src/server.ts",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
         "preview": "vite preview"
