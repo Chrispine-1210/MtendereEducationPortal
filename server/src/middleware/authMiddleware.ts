@@ -1,10 +1,27 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 
-export function authenticate(req: Request, res: Response, next: NextFunction) {
-  // Example: Simple token check (replace with real auth logic)
-  const token = req.headers['authorization'];
-  if (!token || token !== 'your-secret-token') {
-    return res.status(401).json({ error: 'Unauthorized' });
+// ✅ Protect route middleware
+export const protect = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "Not authorized, no token" });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+    (req as any).user = decoded; // attach user to request
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Not authorized, token failed" });
+  }
+};
+
+// ✅ Admin route middleware
+export const admin = (req: Request, res: Response, next: NextFunction) => {
+  if ((req as any).user?.role !== "admin") {
+    return res.status(403).json({ message: "Not authorized as admin" });
   }
   next();
-}
+};
