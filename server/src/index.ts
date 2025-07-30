@@ -1,12 +1,22 @@
 import { fileURLToPath } from "url";
 import path from "path";
+import cors from "cors";
+import dotenv from "dotenv";
+import { Session } from "express-session";
 import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import http from "http";
 import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
-
-
+import authRoutes from "./routes/auth.routes";
+import courseRoutes from "./routes/courses.routes";
+import jobRoutes from "./routes/jobs.routes";
+import testimonialsRoutes from "./routes/testimonials.routes";
+import applicationsRoutes from "./routes/applications.routes";
+import usersRoutes from "./routes/users.routes"
+import scholarshipsRoutes  from "./routes/scholarships.routes";
+import schema from "./schema/schema";
+import { db } from "./config/db"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
