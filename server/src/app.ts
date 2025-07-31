@@ -8,15 +8,7 @@ import { errorHandler } from "./middleware/errorHandler";
 import { registerRoutes } from "./routes";
 import { requestLogger } from "./middleware/requestLogger";
 import dotenv from "dotenv";
-
-import testimonialRoutes from "./routes/testimonials.routes";
-import userRoutes from "./routes/users.routes";
-import courseRoutes from "./routes/courses.routes";
-import jobRoutes from "./routes/jobs.routes";
-import partnerRoutes from "./routes/partners.routes";
-import scholarshipRoutes from "./routes/scholarships.routes";
-import applicationRoutes from "./routes/applications.routes";
-import authRoutes from "./routes/auth.routes";
+import schema from "./schema/schema";
 
 dotenv.config();
 
@@ -26,14 +18,7 @@ export const createApp = (): Application => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    app.use("/modules/testimonials", testimonialRoutes);
-    app.use("/modules/users", userRoutes);
-    app.use("/modules/courses", courseRoutes);
-    app.use("/modules/jobs", jobRoutes);
-    app.use("/modules/partners", partnerRoutes);
-    app.use("/modules/scholarships", scholarshipRoutes);
-    app.use("/modules/applications", applicationRoutes);
-    app.use("/modules/auth", authRoutes);
+    app.use("/schema/schema", schema);
 
     /** ✅ Security & Core Middleware */
     app.use(helmet()); // Secure HTTP headers
