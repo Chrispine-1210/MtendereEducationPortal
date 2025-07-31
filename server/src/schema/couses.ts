@@ -1,5 +1,5 @@
 import { pgTable, serial, text, timestamp, integer } from "drizzle-orm/pg-core";
-import { user } from "./users";
+import { users } from "./users";
 
 export const courses = pgTable("courses", {
   id: serial("id").primaryKey(),
@@ -7,6 +7,8 @@ export const courses = pgTable("courses", {
   description: varchar("description", { length: 1000 }),
   imageUrl: text("image_url"),
   content: text("content"),
+  serviceId: integer("service_id").references(() => services.id),
+  instructorId: integer("instructor_id").references(() => users.id),
   createdBy: integer("created_by").references(() => users.id),
   createdAt: timestamp("created_at").defaultNow(),
 });

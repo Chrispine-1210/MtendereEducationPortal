@@ -6,22 +6,50 @@ import { Session } from "express-session";
 import "dotenv/config";
 import express, { Request, Response, NextFunction } from "express";
 import http from "http";
+
 import { registerRoutes } from "./registerRoutes";
 import { setupVite, serveStatic, log } from "./vite";
 import authRoutes from "./routes/auth.routes";
 import courseRoutes from "./routes/courses.routes";
-import jobRoutes from "./routes/jobs.routes";
+import jobsRoutes from "./routes/jobs.routes";
 import testimonialsRoutes from "./routes/testimonials.routes";
 import applicationsRoutes from "./routes/applications.routes";
 import usersRoutes from "./routes/users.routes"
 import scholarshipsRoutes  from "./routes/scholarships.routes";
+import partnersRoutes from "./routes/partners.routes";
+import teamRoutes from "./routes/team.routes";
 import schema from "./schema/schema";
-import { db } from "./config/db"
+import { db } from "./config/db";
+
+dotenv.config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
 const server = http.createServer(app);
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true }));
+app.use(session({
+  secret: process.env.SESSION_SECRET!,
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(express.json());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/courses", courseRoutes);
+app.use("/api/applications", applicationsRoutes);
+app.use("/api/jobs", jobsRoutes);
+app.use("/api/testimonials", testimonialsRoutes);
+app.use("/api/scholarships", scholarshipsRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/team", teamRoutes);
+app.use("/api/partners", partnersRoutes);
+
+app.get("/", (_, res) => res.send("Mtendere API Running"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
