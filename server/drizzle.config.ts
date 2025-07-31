@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  schema: "./", // path to your schema files
+  schema: "./src/schema/schema", // path to your schema files
   out: "./drizzle",             // migrations output folder
   driver: "pg",                 // or 'mysql2' / 'better-sqlite3'
   dbCredentials: {
