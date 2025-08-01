@@ -13,6 +13,7 @@
     "include": [
       "client/src/**/*",
       "server/**/*",
+      "vite.config",
       "shared/**/*"
     ],
     "exclude": [
