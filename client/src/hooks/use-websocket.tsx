@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./use-auth";
-import { queryClient } from "@/api/queryClient";
+import { queryClient } from "@/lib/queryClient";
 
 interface WebSocketContextType {
   isConnected: boolean;

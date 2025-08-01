@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import ExpandingNav from "@/components/expanding-nav";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/api/queryClient";
+import { apiRequest } from "@/lib/queryClient";
 import { 
   Search, 
   Filter, 

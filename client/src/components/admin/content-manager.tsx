@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/api/queryClient";
+import { apiRequest } from "@/lib/queryClient";
 import { 
   Plus, 
   Edit, 
