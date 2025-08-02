@@ -10,7 +10,7 @@ module.exports = {
         watch: false,                  // Set to true in development only
         env: {
           NODE_ENV: 'production',
-          PORT: 5000                   // You can change this if needed
+          PORT: 3000                   // You can change this if needed
         }
       }
     ]

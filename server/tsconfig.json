@@ -1,13 +1,12 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
     "paths": {"shared/*": ["../shared"]
     },
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true,
@@ -18,7 +17,7 @@
     "noImplicitAny": false,
     "sourceMap": true
   },
-  "include": ["src/**/*", "src/ai.ts"],
+  "include": ["src/ai.ts"],
   "exclude": ["node_modules", "dist"]
 }
 
