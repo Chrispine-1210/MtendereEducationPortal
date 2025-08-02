@@ -8,7 +8,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'client/src'),
-      '@shared': path.resolve(__dirname, './shared/schema.ts')
+      '@shared': path.resolve(__dirname, 'shared/schema.ts')
     }
   },
   root: path.resolve(__dirname, 'client'),
@@ -20,7 +20,7 @@ export default defineConfig({
     port: 5173,
     open: true,
     proxy: {
-      '/api': 'http://localhost:3000', // Make sure backend is running on this port
+      '.routes': 'http://localhost:3000', // Make sure backend is running on this port
     }
   }
 });

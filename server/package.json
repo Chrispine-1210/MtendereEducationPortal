@@ -5,7 +5,7 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "tsx index.ts",
+    "dev": "tsx",
     "build": "tsc vite build --config client/vite.config.ts && vite build --ssr",
     "start": "node dist/index.js",
     "preview": "node"
