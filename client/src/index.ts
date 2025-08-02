@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Basic API route
-app.get('/api/ping', (_req, res) => {
+app.get('/routes/ping', (_req, res) => {
     res.json({ message: 'pong' });
 });
 
