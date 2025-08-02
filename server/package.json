@@ -5,10 +5,10 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "tsx",
-    "build": "tsc vite build --config client/vite.config.ts && vite build --ssr client/entry-server.tsx",
+    "dev": "tsx index.ts",
+    "build": "tsc vite build --config client/vite.config.ts && vite build --ssr",
     "start": "node dist/index.js",
-    "preview": "node dist/server/entry-server.ts"
+    "preview": "node"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.850.0",
