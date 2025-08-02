@@ -4,7 +4,7 @@ import {
   type Application, type InsertApplication, type Partner, type InsertPartner, type Testimonial, type InsertTestimonial,
   type BlogPost, type InsertBlogPost, type TeamMember, type InsertTeamMember, type Referral, type InsertReferral,
   type Analytics, type InsertAnalytics
-} from "@shared/schema/schema.ts";
+} from "../shared/schema";
 import { db } from "./db";
 import { eq, desc, and, or, like, count, sql } from "drizzle-orm";
 
