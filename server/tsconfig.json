@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "NodeNext",
     "rootDir": "./",
     "outDir": "./dist",
     "strict": true,
@@ -13,7 +13,10 @@
     "resolveJsonModule": true,
     "types": ["node", "express"],
     "noImplicitAny": false,
-    "sourceMap": true
+    "sourceMap": true,
+      "ts-node":{
+        "esm": true
+      },
   },
   "include": ["src/ai.ts"],
   "exclude": ["node_modules", "dist"]

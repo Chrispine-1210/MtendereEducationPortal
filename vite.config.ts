@@ -20,7 +20,7 @@ export default defineConfig({
     port: 3000,
     open: true,
     proxy: {
-      '.routes': 'http://localhost:3000', // Make sure backend is running on this port
+      '.routes': 'http://localhost:3001', // Make sure backend is running on this port
     }
   }
 });
