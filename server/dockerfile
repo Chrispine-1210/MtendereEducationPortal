@@ -1,0 +1,38 @@
+# ---------- 1. Base builder stage ----------
+FROM node:20 AS builder
+
+WORKDIR /app/server
+# Copy root tsconfig.json to /app/tsconfig.json
+COPY tsconfig.json /app/server/tsconfig.json
+
+# Copy package files first
+COPY package.json ./
+
+# Install all dependencies (including dev for build)
+RUN npm install
+
+# Copy source files
+COPY . .
+
+# Build the TypeScript app
+RUN npm run build
+
+
+# ---------- 2. Final production image ----------
+FROM node:20-slim AS production
+
+WORKDIR /app
+
+# Copy only necessary files
+COPY package.json ./
+
+# Install only production dependencies
+RUN npm install --only=production
+
+# Copy built dist folder from builder
+COPY --from=builder /app/dist ./dist
+
+ENV NODE_ENV=production
+EXPOSE 3000
+
+CMD ["node", "dist/index.js"]
