@@ -7,7 +7,7 @@ dotenv.config();
 const apiKey = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({ 
-  apiKey: process.env.OPENAI_API_KEY;
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 export async function getChatResponse(message: string): Promise<string> {
