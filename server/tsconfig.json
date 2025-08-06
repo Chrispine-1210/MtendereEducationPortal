@@ -1,8 +1,7 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2022",
-    "module": "ESNext",
+    "target": "esNext",
     "moduleResolution": "NodeNext",
     "rootDir": "./",
     "outDir": "./dist",
@@ -13,10 +12,10 @@
     "resolveJsonModule": true,
     "types": ["node", "express"],
     "noImplicitAny": false,
-    "sourceMap": true,
-      "ts-node":{
-        "esm": true
-      },
+    "sourceMap": true
+  },
+  "ts-node":{
+    "esm": true
   },
   "include": ["src/ai.ts"],
   "exclude": ["node_modules", "dist"]

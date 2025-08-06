@@ -5,10 +5,15 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "NODE_EV=development tsx watch --loader=ts-node/esm index.ts ",
-    "build": "tsc vite build --config client/vite.config.ts && vite build --ssr",
+    "dev": "NODE_ENV=development tsx index.ts ",
+    "build": "tsc",
     "start": "node dist/index.js",
-    "preview": "node"
+    "preview": "node",
+    "dev:server": "cd server && npm run dev",
+    "dev:client": "cd client && npm run dev"
+  },
+  "ts-node": {
+    "esm": true
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.850.0",
@@ -19,7 +24,7 @@
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
-    "drizzle-orm": "^0.27.2",
+    "drizzle-orm": "^0.44.4",
     "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
@@ -38,13 +43,13 @@
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.0.0",
-    "@types/node": "^24.1.0",
+    "@types/node": "^24.2.0",
     "@types/ws": "^8.18.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "tsup": "^8.5.0",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "main": "index.js",
   "keywords": [],

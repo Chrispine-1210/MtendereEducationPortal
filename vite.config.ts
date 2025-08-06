@@ -7,8 +7,8 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'client/src'),
-      '@shared': path.resolve(__dirname, 'shared/schema.ts')
+      '@': path.resolve(__dirname, './client/src'),
+      '@shared': path.resolve(__dirname, './shared/schema.ts')
     }
   },
   root: path.resolve(__dirname, 'client'),
@@ -17,11 +17,10 @@ export default defineConfig({
     emptyOutDir: true
   },
   server: {
-    port: 3000,
+    port: 3001,
     open: true,
     proxy: {
-      '.routes': 'http://localhost:3001', // Make sure backend is running on this port
+      'api': 'http://127.0.0.1:3001', // Make sure backend is running on this port
     }
   }
 });
-
