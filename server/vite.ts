@@ -2,8 +2,8 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { createServer as createViteServer, type UserConfig } from "vite";
-import { type Server as HttpServer } from "http";
+import { createServer as createViteServer, type UserConfig } from "vite/dist/node/index.js";
+import { createServer, type Server as HttpServer } from "http";
 import { nanoid } from "nanoid";
 import { fileURLToPath } from "url";
 
@@ -70,11 +70,13 @@ export async function setupVite(
   const vite = await createViteServer({
     ...((viteConfig as UserConfig) ?? {}),
     configFile: false,
-    server: serverOptions,
+    server: { middlewareMode: true },
     appType: "custom",
   });
 
   app.use(vite.middlewares);
+
+  app.get("/api/status", (_, res) => res.json({ status: "OK" }));
 
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -99,6 +101,7 @@ export async function setupVite(
       next(e);
     }
   });
+  return { app, vite };
 }
 
 /**
