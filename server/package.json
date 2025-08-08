@@ -10,7 +10,9 @@
     "start": "node dist/index.js",
     "preview": "node",
     "dev:server": "cd server && npm run dev",
-    "dev:client": "cd client && npm run dev"
+    "dev:client": "cd client && npm run dev",
+    "db:push": "drizzle-kit push:pg",
+    "db:migrate": "drizzle-kit migrate:pg"
   },
   "ts-node": {
     "esm": true
@@ -25,7 +27,6 @@
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
-    "drizzle-orm": "^0.44.4",
     "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",

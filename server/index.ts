@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const envPath = path.resolve(__dirname, ".env");
-dotenv.config({ path: envPath });
+dotenv.config();
 
 console.log("[env] Loaded .env from", envPath);
 console.log("[env] DATABASE_URL =", process.env.DATABASE_URL ? "[REDACTED]" : "undefined");

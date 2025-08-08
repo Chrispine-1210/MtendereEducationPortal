@@ -1,7 +1,7 @@
 // server/db.ts
+import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import dotenv from "dotenv";
 
 
 // Load .env before doing anything else
@@ -11,9 +11,10 @@ dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 
 import { Pool, neonConfig } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-serverless";
+import { drizzle } from "drizzle-orm/node-postgres";
+import pg from "pg";
 import ws from "ws";
-import * as schema from "../shared/schema.ts";
+import * as schema from "../shared/schema";
 
 
 neonConfig.webSocketConstructor = ws;
@@ -24,6 +25,10 @@ if (!process.env.DATABASE_URL) {
 }
 
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+export const pool = new pg.Pool({ 
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorised: false;
+  }
+});
 export const db = drizzle({ client: pool, schema });
-
