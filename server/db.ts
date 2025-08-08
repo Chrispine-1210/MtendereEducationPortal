@@ -10,8 +10,9 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
 
-import { Pool, neonConfig } from "@neondatabase/serverless";
+import { neonConfig } from "@neondatabase/serverless";
 import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
 import pg from "pg";
 import ws from "ws";
 import * as schema from "../shared/schema";
@@ -28,7 +29,7 @@ if (!process.env.DATABASE_URL) {
 export const pool = new pg.Pool({ 
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorised: false;
+    rejectUnauthorized: false,
   }
 });
-export const db = drizzle({ client: pool, schema });
+export const db = drizzle( pool, { schema });
