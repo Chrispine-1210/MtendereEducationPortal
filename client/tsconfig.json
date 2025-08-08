@@ -2,6 +2,8 @@
     "extends": "../tsconfig.json",
     "compilerOptions": {
         "composite": true,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
         "noEmit": true,
         "baseUrl": ".",
         "outDir": "./dist",
