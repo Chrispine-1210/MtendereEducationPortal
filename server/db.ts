@@ -15,7 +15,8 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import pg from "pg";
 import ws from "ws";
-import * as schema from "../shared/schema";
+import * as schema from "./drizzle/schema";
+
 
 
 neonConfig.webSocketConstructor = ws;
