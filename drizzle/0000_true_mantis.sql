@@ -1,4 +1,4 @@
-CREATE TABLE "analytics" (
+CREATE TABLE IF NOT EXISTS "analytics" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"event" varchar(100) NOT NULL,
 	"user_id" integer,

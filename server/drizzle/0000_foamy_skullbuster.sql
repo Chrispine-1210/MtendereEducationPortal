@@ -1,7 +1,7 @@
 -- Current sql file was generated after introspecting the database
 -- If you want to run this migration please uncomment this code before executing migrations
-/*
-CREATE TABLE "analytics" (
+
+CREATE TABLE IF NOT EXISTS "analytics" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"event" varchar(100) NOT NULL,
 	"user_id" integer,
@@ -11,7 +11,7 @@ CREATE TABLE "analytics" (
 	"timestamp" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "applications" (
+CREATE TABLE IF NOT EXISTS "applications" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
 	"type" varchar(50) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE "applications" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "blog_posts" (
+CREATE TABLE IF NOT EXISTS "blog_posts" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"content" text NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE "blog_posts" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "jobs" (
+CREATE TABLE IF NOT EXISTS "jobs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"description" text NOT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE "jobs" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "partners" (
+CREATE TABLE IF NOT EXISTS "partners" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"description" text NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE "partners" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "referrals" (
+CREATE TABLE IF NOT EXISTS "referrals" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"referrer_id" integer NOT NULL,
 	"referred_user_id" integer,
@@ -81,7 +81,7 @@ CREATE TABLE "referrals" (
 	"completed_at" timestamp
 );
 --> statement-breakpoint
-CREATE TABLE "scholarships" (
+CREATE TABLE IF NOT EXISTS "scholarships" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" text NOT NULL,
 	"description" text NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE "scholarships" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "team_members" (
+CREATE TABLE IF NOT EXISTS "team_members" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"position" text NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE "team_members" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "testimonials" (
+CREATE TABLE IF NOT EXISTS "testimonials" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"user_id" integer NOT NULL,
 	"content" text NOT NULL,
@@ -124,7 +124,7 @@ CREATE TABLE "testimonials" (
 	"updated_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
-CREATE TABLE "users" (
+CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"username" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
