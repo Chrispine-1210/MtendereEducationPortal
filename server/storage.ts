@@ -1,3 +1,4 @@
+import { analytics } from './../shared/schema';
 import {
   users, scholarships, jobs, applications, partners, testimonials, blogPosts, teamMembers, referrals, analytics,
   type User, type InsertUser, type Scholarship, type InsertScholarship, type Job, type InsertJob,
@@ -187,8 +188,8 @@ export class DatabaseStorage implements IStorage {
 
   // Jobs
   async getJob(id: number): Promise<Job | undefined> {
-    const [job] = await db.select().from(jobs).where(eq(jobs.id, id));
-    return job || undefined;
+    const [jobRow] = await db.select().from(jobs).where(eq(jobs.id, id));
+    return jobRow || undefined;
   }
 
   async getAllJobs(): Promise<Job[]> {
@@ -242,8 +243,8 @@ export class DatabaseStorage implements IStorage {
 
   // Applications
   async getApplication(id: number): Promise<Application | undefined> {
-    const [application] = await db.select().from(applications).where(eq(applications.id, id));
-    return application || undefined;
+    const [applicationRow] = await db.select().from(applications).where(eq(applications.id, id));
+    return applicationRow || undefined;
   }
 
   async getUserApplications(userId: number): Promise<Application[]> {
@@ -279,8 +280,8 @@ export class DatabaseStorage implements IStorage {
 
   // Partners
   async getPartner(id: number): Promise<Partner | undefined> {
-    const [partner] = await db.select().from(partners).where(eq(partners.id, id));
-    return partner || undefined;
+    const [partnerRow] = await db.select().from(partners).where(eq(partners.id, id));
+    return partnerRow || undefined;
   }
 
   async getAllPartners(): Promise<Partner[]> {
@@ -316,8 +317,8 @@ export class DatabaseStorage implements IStorage {
 
   // Testimonials
   async getTestimonial(id: number): Promise<Testimonial | undefined> {
-    const [testimonial] = await db.select().from(testimonials).where(eq(testimonials.id, id));
-    return testimonial || undefined;
+    const [testimonialRow] = await db.select().from(testimonials).where(eq(testimonials.id, id));
+    return testimonialRow || undefined;
   }
 
   async getAllTestimonials(): Promise<Testimonial[]> {
@@ -353,8 +354,8 @@ export class DatabaseStorage implements IStorage {
 
   // Blog Posts
   async getBlogPost(id: number): Promise<BlogPost | undefined> {
-    const [blogPost] = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
-    return blogPost || undefined;
+    const [blogPostRow] = await db.select().from(blogPosts).where(eq(blogPosts.id, id));
+    return blogPostRow || undefined;
   }
 
   async getAllBlogPosts(): Promise<BlogPost[]> {
@@ -390,8 +391,8 @@ export class DatabaseStorage implements IStorage {
 
   // Team Members
   async getTeamMember(id: number): Promise<TeamMember | undefined> {
-    const [teamMember] = await db.select().from(teamMembers).where(eq(teamMembers.id, id));
-    return teamMember || undefined;
+    const [teamMemberRow] = await db.select().from(teamMembers).where(eq(teamMembers.id, id));
+    return teamMemberRow || undefined;
   }
 
   async getAllTeamMembers(): Promise<TeamMember[]> {
@@ -427,8 +428,8 @@ export class DatabaseStorage implements IStorage {
 
   // Referrals
   async getReferral(id: number): Promise<Referral | undefined> {
-    const [referral] = await db.select().from(referrals).where(eq(referrals.id, id));
-    return referral || undefined;
+    const [referralRow] = await db.select().from(referrals).where(eq(referrals.id, id));
+    return referralRow || undefined;
   }
 
   async getUserReferrals(userId: number): Promise<Referral[]> {
@@ -464,8 +465,8 @@ export class DatabaseStorage implements IStorage {
 
   // Analytics
   async logAnalytics(insertAnalytics: InsertAnalytics): Promise<Analytics> {
-    const [analytics] = await db.insert(analytics).values(insertAnalytics).returning();
-    return analytics;
+    const [analyticsRow] = await db.insert(analytics).values(insertAnalytics).returning();
+    return analyticsRow;
   }
 
   async getAnalytics(startDate?: Date, endDate?: Date): Promise<Analytics[]> {
