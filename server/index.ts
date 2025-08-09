@@ -43,30 +43,16 @@ app.use(express.urlencoded({ extended: false }));
     // ------------------------------
     // 5) Frontend Serving
     // ------------------------------
-    if (isDev) {
-      // In development: proxy to Vite for hot reload
-      const { createProxyMiddleware } = await import("http-proxy-middleware");
-      app.use(
-        "/",
-        createProxyMiddleware({
-          target: "http://localhost:3000", // Vite default port
-          changeOrigin: true,
-          ws: true, // WebSocket for HMR
-        })
-      );
-      logger.info("Proxying frontend to Vite dev server at http://127.0.0.1:3000");
-    } else {
-      // In production: serve built frontend
+    if (!isDev) {
       const clientDistPath = path.resolve(__dirname, "../client/dist");
       app.use(express.static(clientDistPath));
-
-      // SPA fallback for non-API routes
       app.get("*", (req, res, next) => {
         if (req.path.startsWith("/api")) return next();
         res.sendFile(path.join(clientDistPath, "index.html"));
       });
       logger.info("Serving frontend from /client/dist");
     }
+    
 
     // ------------------------------
     // 6) Error Handler
