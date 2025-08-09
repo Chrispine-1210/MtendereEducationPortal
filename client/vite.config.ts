@@ -1,50 +1,50 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { defineConfig, loadEnv } from "vite";
+import react from "@vitejs/plugin-react";
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@shared': path.resolve(__dirname, '../shared/schema.ts')
-    }
-  },
-  
-  css: {
-    preprocessorOptions: {
-      less: {
-        math: 'parens-division',
-      },
-      scss: {
-        importers: ['./postcss.config.cjs'],
-        additionalData: '$injectedColor: orange;',
-      },
-    }
-  },
 
-  server: {
-    port: 3000,
-    proxy: {
-      '/api': {
-        target: `http://127.0.0.1:3001`,
-        changeOrigin: true,
-        secure: false,
-      },
-      '/uploads':{
-        target: 'http://127.0.0.1:3001',
-        changeOrigin: true,
-      },
-    }
-  },
+export default defineConfig(({ mode }) => {
+    const env = loadEnv(mode, process.cwd(), "");
 
-  root: path.resolve(__dirname),
-  build: {
-    ssrManifest: true,
-    outDir: path.resolve(__dirname, '../dist/public'),
-    rollupOptions: {
-      input: path.resolve(__dirname, 'index.html'),
-    },
-    emptyOutDir: true,
-  },
+
+    return {
+        plugins: [react()],
+        server: {
+            port: 3000,
+            strictPort: true,
+            proxy: {
+                "/api": {
+                    target: env.VITE_API_URL || "http://localhost:3001",
+                    changeOrigin: true,
+                    secure: false,
+                },
+                "/auth": {
+                    target: env.VITE_API_URL || "http://localhost:3001",
+                    changeOrigin: true,
+                    secure: false,
+                },
+                "/socket.io": {
+                    target: env.VITE_API_URL || "http://localhost:3001",
+                    ws: true,
+                    changeOrigin: true,
+                },
+            },
+        },
+        build: {
+            outDir: "dist",
+            sourcemap: mode === "development",
+            rollupOptions: {
+                output: {
+                    manualChunks: {
+                        vendor: ["react", "react-dom"],
+                    },
+                },
+            },
+        },
+        resolve: {
+            alias: {
+                "@": "/src",
+            },
+        },
+    };
 });
+
