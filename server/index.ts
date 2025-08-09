@@ -1,11 +1,10 @@
-import { logger } from './vite';
 // server/index.ts
 
 // 1) Load dotenv first (ESM-safe)
 import dotenv from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { logger } from "./logger";
+import { logger } from "./utils/logger";
 
 logger.info("server started")
 logger.error("Something went wrong")
