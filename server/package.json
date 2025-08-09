@@ -5,7 +5,7 @@
   "type": "module",
   "module": "ESNext",
   "scripts": {
-    "dev": "NODE_ENV=development tsx index.ts ",
+    "dev": "NODE_ENV=development tsx --trace-deprecation index.ts ",
     "build": "tsc",
     "start": "node dist/index.js",
     "preview": "node",
@@ -31,6 +31,7 @@
     "express-async-handler": "^1.2.0",
     "express-session": "^1.17.3",
     "helmet": "^7.0.0",
+    "http-proxy-middleware": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.525.0",
     "morgan": "^1.10.1",

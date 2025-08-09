@@ -20,7 +20,7 @@ export default defineConfig({
     emptyOutDir: true
   },
   server: {
-    port: 3001,
+    port: 3000,
     open: true,
     proxy: {
       'api': 'http://127.0.0.1:3001', // Make sure backend is running on this port
