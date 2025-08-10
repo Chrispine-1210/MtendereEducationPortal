@@ -10,20 +10,19 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './client/src'),
+      '@': path.resolve(__dirname, './client/src', './server'),
       '@shared': path.resolve(__dirname, './shared/schema.ts')
     }
   },
-  root: path.resolve(__dirname, 'client'),
+  root: path.resolve(__dirname, 'client', 'server'),
   build: {
     outDir: path.resolve(__dirname, 'dist/public'),
     emptyOutDir: true
   },
   server: {
-    port: 3000,
-    open: true,
-    proxy: {
-      '/api': 'http://127.0.0.1:3000', // Make sure backend is running on this port
-    }
-  }
+    fs: {
+      strict: true,
+      deny: ["**/.*"],
+    },
+  },
 });
