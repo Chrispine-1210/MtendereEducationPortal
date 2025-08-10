@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  BarChart3, 
-  Users, 
-  TrendingUp, 
+import {
+  BarChart3,
+  Users,
+  TrendingUp,
   Activity,
   Calendar,
   Download,
@@ -29,18 +29,18 @@ export default function AnalyticsDashboard() {
 
   const getEventCounts = () => {
     if (!analytics) return {};
-    
+
     const counts: Record<string, number> = {};
     analytics.forEach((event: any) => {
       counts[event.event] = (counts[event.event] || 0) + 1;
     });
-    
+
     return counts;
   };
 
   const getRecentActivity = () => {
     if (!analytics) return [];
-    
+
     return analytics
       .slice(0, 10)
       .map((event: any) => ({
@@ -52,7 +52,7 @@ export default function AnalyticsDashboard() {
   const getPopularPages = () => {
     const events = getEventCounts();
     return Object.entries(events)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
   };
 
@@ -186,7 +186,7 @@ export default function AnalyticsDashboard() {
                   <Badge variant="secondary">{count}</Badge>
                 </div>
               ))}
-              
+
               {popularPages.length === 0 && (
                 <p className="text-center text-gray-500 py-8">No activity data available</p>
               )}
@@ -225,7 +225,7 @@ export default function AnalyticsDashboard() {
                   </div>
                 </div>
               ))}
-              
+
               {recentActivity.length === 0 && (
                 <p className="text-center text-gray-500 py-8">No recent activity</p>
               )}

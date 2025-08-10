@@ -9,11 +9,11 @@ import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { 
-  Plus, 
-  Edit, 
-  Trash2, 
-  Search, 
+import {
+  Plus,
+  Edit,
+  Trash2,
+  Search,
   Filter,
   Save,
   X,
@@ -221,7 +221,7 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
                 />
               </div>
             </div>
-            
+
             <div>
               <Label htmlFor="description">Description</Label>
               <Textarea
@@ -309,7 +309,7 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
                 />
               </div>
             </div>
-            
+
             <div>
               <Label htmlFor="description">Description</Label>
               <Textarea
@@ -385,7 +385,7 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
                 placeholder="Blog post title"
               />
             </div>
-            
+
             <div>
               <Label htmlFor="excerpt">Excerpt</Label>
               <Textarea
@@ -445,9 +445,9 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
               <Button variant="ghost" size="icon" onClick={() => handleEdit(item)}>
                 <Edit className="w-4 h-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => handleDelete(item.id)}
                 className="text-red-600 hover:text-red-700"
               >
@@ -497,7 +497,7 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
   );
 
   const getTitle = () => {
-    return contentType.split('-').map(word => 
+    return contentType.split('-').map(word =>
       word.charAt(0).toUpperCase() + word.slice(1)
     ).join(' ');
   };
@@ -563,7 +563,7 @@ export default function ContentManager({ contentType }: ContentManagerProps) {
                 <X className="w-4 h-4 mr-2" />
                 Cancel
               </Button>
-              <Button 
+              <Button
                 onClick={handleSave}
                 disabled={createMutation.isPending || updateMutation.isPending}
                 className="bg-mtendere-green hover:bg-green-700"

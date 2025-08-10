@@ -23,7 +23,7 @@ export default defineConfig({
     port: 3000,
     open: true,
     proxy: {
-      'api': 'http://127.0.0.1:3001', // Make sure backend is running on this port
+      '/api': 'http://127.0.0.1:3000', // Make sure backend is running on this port
     }
   }
 });

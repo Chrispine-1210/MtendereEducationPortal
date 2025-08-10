@@ -13,17 +13,17 @@ export default defineConfig(({ mode }) => {
             strictPort: true,
             proxy: {
                 "/api": {
-                    target: env.VITE_API_URL || "http://localhost:3001",
+                    target: env.VITE_SERVER_URL || "http://127.0.0.1:3001",
                     changeOrigin: true,
                     secure: false,
                 },
                 "/auth": {
-                    target: env.VITE_API_URL || "http://localhost:3001",
+                    target: env.VITE_SERVER_URL || "http://127.0.0.1:3001",
                     changeOrigin: true,
                     secure: false,
                 },
                 "/socket.io": {
-                    target: env.VITE_API_URL || "http://localhost:3001",
+                    target: env.VITE_SERVER_URL || "http://127.0.0.1:3001",
                     ws: true,
                     changeOrigin: true,
                 },

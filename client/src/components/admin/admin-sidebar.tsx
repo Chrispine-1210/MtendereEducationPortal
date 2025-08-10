@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/use-auth";
 import { useWebSocket } from "@/hooks/use-websocket";
 import { Link } from "wouter";
-import { 
+import {
   LayoutDashboard,
   GraduationCap,
   Briefcase,
@@ -93,17 +93,16 @@ export default function AdminSidebar({ activeView, onViewChange, isOpen, onToggl
     <>
       {/* Mobile overlay */}
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={onToggle}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`fixed left-0 top-0 h-full w-64 bg-mtendere-dark text-white transform transition-transform duration-300 z-50 ${
-        isOpen ? 'translate-x-0' : '-translate-x-full'
-      } lg:translate-x-0`}>
-        
+      <div className={`fixed left-0 top-0 h-full w-64 bg-mtendere-dark text-white transform transition-transform duration-300 z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+        } lg:translate-x-0`}>
+
         {/* Header */}
         <div className="p-6 border-b border-gray-700">
           <div className="flex items-center justify-between">
@@ -152,11 +151,10 @@ export default function AdminSidebar({ activeView, onViewChange, isOpen, onToggl
                   onViewChange(item.id);
                   if (window.innerWidth < 1024) onToggle();
                 }}
-                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${
-                  activeView === item.id
+                className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-left transition-colors ${activeView === item.id
                     ? 'bg-mtendere-blue text-white'
                     : 'text-gray-300 hover:bg-gray-700 hover:text-white'
-                }`}
+                  }`}
               >
                 <item.icon className={`w-5 h-5 ${activeView === item.id ? 'text-white' : item.color}`} />
                 <span className="font-medium">{item.label}</span>
@@ -173,7 +171,7 @@ export default function AdminSidebar({ activeView, onViewChange, isOpen, onToggl
               Back to Website
             </Link>
           </Button>
-          
+
           <Button
             variant="ghost"
             onClick={logout}

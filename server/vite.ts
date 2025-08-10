@@ -2,7 +2,7 @@
 import express, { type Express } from "express";
 import fs from "fs";
 import path from "path";
-import { createServer as createViteServer, type UserConfig } from "vite/dist/node/index.js";
+import { createServer as createViteServer, type UserConfig } from "vite";
 import { createServer, type Server as HttpServer } from "http";
 import { nanoid } from "nanoid";
 import { fileURLToPath } from "url";
