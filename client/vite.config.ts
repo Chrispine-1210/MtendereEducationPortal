@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
         },
         resolve: {
             alias: {
-                '@client': path.resolve(__dirname, './src'),
+                '@': path.resolve(__dirname, './src'),
                 '@shared': path.resolve(__dirname, '../shared/schema.ts'),
             },
         },
