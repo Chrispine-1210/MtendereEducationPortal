@@ -18,7 +18,7 @@
     "esm": true
   },
   "dependencies": {
-    "@shared/schema": "workspace",
+    "@shared/schema": "file:../shared",
     "@aws-sdk/client-s3": "^3.850.0",
     "@fontsource/inter": "^5.2.6",
     "@neondatabase/serverless": "^1.0.1",

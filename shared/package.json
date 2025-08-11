@@ -1,7 +1,6 @@
 {
     "name": "@shared/schema",
     "version": "1.0.0",
-    "private": true,
     "main": "schema.ts",
     "type": "module",
     "types": "schema.ts",
