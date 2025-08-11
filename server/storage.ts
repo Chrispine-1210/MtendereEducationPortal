@@ -1,11 +1,10 @@
-import { analytics } from './../shared/schema';
 import {
   users, scholarships, jobs, applications, partners, testimonials, blogPosts, teamMembers, referrals, analytics,
   type User, type InsertUser, type Scholarship, type InsertScholarship, type Job, type InsertJob,
   type Application, type InsertApplication, type Partner, type InsertPartner, type Testimonial, type InsertTestimonial,
   type BlogPost, type InsertBlogPost, type TeamMember, type InsertTeamMember, type Referral, type InsertReferral,
   type Analytics, type InsertAnalytics
-} from "../shared/schema.ts";
+} from "@shared/schema.ts";
 import { db } from "./db";
 import { eq, desc, and, or, like, count, sql } from "drizzle-orm";
 

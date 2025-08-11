@@ -1,4 +1,3 @@
-import { createServer as createViteServer, InlineConfig } from "vite";
 import express from "express";
 import * as path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,8 +11,6 @@ export async function setupVite(app: express.Express) {
     appType: "custom", // avoid Vite's default HTML handling
     root: path.resolve(__dirname, "../client"),
   };
-
-  const vite = await createViteServer(viteConfig);
 
   app.use(vite.middlewares); // attach Vite middleware to Express
 }

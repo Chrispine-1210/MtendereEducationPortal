@@ -1,3 +1,4 @@
+import { VitePluginNode } from 'vite-plugin-node';
 // client/vite.config.ts
 import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
@@ -7,7 +8,15 @@ export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, process.cwd(), '');
 
     return {
-        plugins: [react()],
+        plugins: [
+            react(),
+            VitePluginNode({
+                adapter: "express",
+                appPath: "../server/index.ts",
+                exportName: "app",
+                tsCompiler: "esbuild",
+            }),
+        ],
         server: {
             port: 3000,
             strictPort: true,
@@ -46,5 +55,8 @@ export default defineConfig(({ mode }) => {
                 '@shared': path.resolve(__dirname, '../shared/schema.ts'),
             },
         },
+        ssr: {
+            noExternal: []
+        }
     };
 });

@@ -1,13 +1,23 @@
+import { VitePluginNodeConfig } from './node_modules/vite-plugin-node/dist/index.d';
 // vite.config.ts (root)
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'node:path';
 import dns from 'node:dns';
+import { VitePluginNode } from 'vite-plugin-node';
 
 dns.setDefaultResultOrder('verbatim');
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    VitePluginNode ({
+      adapter: "express",
+      appPath: "./server/index.ts",
+      exportName: "app",
+      tsCompiler: "esbuild",
+    }),
+  ],
   root: path.resolve(__dirname, 'client'),
   resolve: {
     alias: {
@@ -21,10 +31,14 @@ export default defineConfig({
     emptyOutDir: true
   },
   server: {
+    port: 3001,
     fs: {
       strict: true,
       deny: ['**/.*'],
     },
   },
+  ssr: {
+    noExternal: []
+  }
 });
 
