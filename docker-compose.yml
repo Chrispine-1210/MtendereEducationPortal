@@ -4,20 +4,8 @@ services:
       context: .
       dockerfile: client/Dockerfile
     ports: 
-    - "5173:80"
-  db:
-    image: postgres:15
-    container_name: mtendere-db
-    restart: always
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mtendere_edu
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
+    - "3000:80"
+    
   backend:
     build:
       context: ./server

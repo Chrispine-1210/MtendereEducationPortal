@@ -14,7 +14,11 @@
     "resolveJsonModule": true,
     "types": ["node", "express", "vite"],
     "noImplicitAny": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "paths": {
+      "@server/*": ["./*"],
+      "@shared/*": ["../shared/*"]
+    }
   },
   "ts-node":{
     "esm": true

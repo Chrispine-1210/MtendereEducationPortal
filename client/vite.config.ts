@@ -18,23 +18,12 @@ export default defineConfig(({ mode }) => {
             }),
         ],
         server: {
-            port: 3000,
             strictPort: true,
             proxy: {
                 '/api': {
-                    target: env.VITE_SERVER_URL || 'http://localhost:3001',
+                    target: env.VITE_API_BASE,
                     changeOrigin: true,
                     secure: false,
-                },
-                '/auth': {
-                    target: env.VITE_SERVER_URL || 'http://localhost:3001',
-                    changeOrigin: true,
-                    secure: false,
-                },
-                '/socket.io': {
-                    target: env.VITE_SERVER_URL || 'http://localhost:3001',
-                    ws: true,
-                    changeOrigin: true,
                 },
             },
         },
@@ -52,7 +41,7 @@ export default defineConfig(({ mode }) => {
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, './src'),
-                '@shared': path.resolve(__dirname, '../shared/schema.ts'),
+                '@shared': path.resolve(__dirname, '../shared'),
             },
         },
         ssr: {

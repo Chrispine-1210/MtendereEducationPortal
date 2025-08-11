@@ -71,3 +71,9 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
 });
 
 // **No server.listen() here** — vite-plugin-node will start the server
+// Add this at the BOTTOM of server/index.ts (after all routes/middleware)
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
+
