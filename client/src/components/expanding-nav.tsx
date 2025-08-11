@@ -121,11 +121,13 @@ export default function ExpandingNav() {
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
+          {
+            <img src="../../../generated-icon.png" alt="" />
+          }
           <Link href="/" onClick={closeMenu}>
             <div className="font-bold text-2xl">
               <span className="text-mtendere-blue">Mtendere</span>{" "}
-              <span className="text-mtendere-green">Education</span>
+              <span className="text-mtendere-green">Edu-Consult</span>
             </div>
           </Link>
 
