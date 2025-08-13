@@ -18,7 +18,6 @@ export default defineConfig({
     server: {
         ...baseConfig.server,
         port: 3001,
-        
         hmr: false // Disable HMR for server
     },
 
