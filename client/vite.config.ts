@@ -7,7 +7,7 @@ export default defineConfig({
     ...baseConfig,
 
     // Explicit root configuration
-    root: path.resolve(__dirname, '.'),
+    root: path.resolve(__dirname, '.', '../admin/src'),
 
     plugins: [
         ...(baseConfig.plugins || []), // Safely spread base plugins
@@ -17,7 +17,8 @@ export default defineConfig({
     resolve: {
         alias: {
             ...baseConfig.resolve?.alias, // Inherit base aliases
-            '@': path.resolve(__dirname, './src') // Add client-specific alias
+            '@': path.resolve(__dirname, './src'), // Add client-specific alias
+            '@admin': path.resolve(__dirname, '../admin/src')
         }
     },
 
