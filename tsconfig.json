@@ -30,6 +30,6 @@
     "esm": true,
     "experimentalSpecifierResolution": "node",
   },
-  "include": ["client/src","admin/src" "server", "shared"],
+  "include": ["client/src","admin/src", "server", "shared"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"]
 }
