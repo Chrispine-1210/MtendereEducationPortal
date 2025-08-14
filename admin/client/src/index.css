@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 25%, 7.8431%);
+  --card: hsl(180, 6.6667%, 97.0588%);
+  --card-foreground: hsl(210, 25%, 7.8431%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 25%, 7.8431%);
+  --primary: hsl(214, 84%, 56%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 40%, 98%);
+  --secondary-foreground: hsl(210, 25%, 7.8431%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(215, 13.8%, 34.1%);
+  --accent: hsl(210, 40%, 96%);
+  --accent-foreground: hsl(214, 84%, 56%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(214, 31.8%, 91.4%);
+  --input: hsl(214, 31.8%, 91.4%);
+  --ring: hsl(214, 84%, 56%);
+  --radius: 0.5rem;
+  --chart-1: hsl(214, 84%, 56%);
+  --chart-2: hsl(147, 100%, 36%);
+  --chart-3: hsl(35, 91%, 65%);
+  --chart-4: hsl(147, 79%, 42%);
+  --chart-5: hsl(342, 75%, 51%);
+}
+
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --primary: hsl(217, 91%, 60%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --ring: hsl(224, 76%, 78%);
+  --chart-1: hsl(220, 70%, 50%);
+  --chart-2: hsl(160, 60%, 45%);
+  --chart-3: hsl(30, 80%, 55%);
+  --chart-4: hsl(280, 65%, 60%);
+  --chart-5: hsl(340, 75%, 55%);
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Custom scrollbar styles */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 2px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Chart container styling */
+.chart-container {
+  height: 300px;
+  position: relative;
+}
+
+/* Line clamp utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Custom focus styles for better accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Hover effects for interactive elements */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Admin-specific styles */
+.admin-sidebar {
+  background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
+}
+
+.admin-sidebar .nav-item:hover {
+  background: hsl(var(--accent));
+  transform: translateX(4px);
+  transition: all 0.2s ease-in-out;
+}
+
+.admin-sidebar .nav-item.active {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  box-shadow: 0 4px 12px hsl(var(--primary) / 0.3);
+}
+
+/* Data table enhancements */
+.data-table-row:hover {
+  background: hsl(var(--muted) / 0.5);
+  transition: background-color 0.15s ease-in-out;
+}
+
+.data-table-header {
+  background: hsl(var(--muted));
+  font-weight: 600;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Status badge styles */
+.status-badge-pending {
+  background: hsl(45, 93%, 47%);
+  color: hsl(26, 83%, 14%);
+}
+
+.status-badge-approved {
+  background: hsl(142, 71%, 45%);
+  color: hsl(138, 62%, 11%);
+}
+
+.status-badge-rejected {
+  background: hsl(0, 84%, 60%);
+  color: hsl(0, 86%, 97%);
+}
+
+.status-badge-draft {
+  background: hsl(213, 27%, 84%);
+  color: hsl(215, 20%, 20%);
+}
+
+.status-badge-published {
+  background: hsl(214, 84%, 56%);
+  color: hsl(0, 0%, 100%);
+}
+
+/* Rich text editor styles */
+.rich-editor {
+  border: 1px solid hsl(var(--border));
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.rich-editor .toolbar {
+  background: hsl(var(--muted));
+  border-bottom: 1px solid hsl(var(--border));
+  padding: 8px;
+}
+
+.rich-editor .content {
+  padding: 12px;
+  min-height: 200px;
+}
+
+.rich-editor .content:focus {
+  outline: none;
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
+}
+
+/* File upload dropzone */
+.upload-dropzone {
+  border: 2px dashed hsl(var(--border));
+  border-radius: var(--radius);
+  transition: all 0.2s ease-in-out;
+}
+
+.upload-dropzone:hover,
+.upload-dropzone.drag-active {
+  border-color: hsl(var(--primary));
+  background: hsl(var(--primary) / 0.05);
+}
+
+/* Analytics chart styling */
+.analytics-chart canvas {
+  border-radius: calc(var(--radius) - 2px);
+}
+
+/* Notification toast enhancements */
+.toast-success {
+  border-left: 4px solid hsl(var(--chart-2));
+}
+
+.toast-error {
+  border-left: 4px solid hsl(var(--destructive));
+}
+
+.toast-warning {
+  border-left: 4px solid hsl(var(--chart-3));
+}
+
+.toast-info {
+  border-left: 4px solid hsl(var(--primary));
+}
+
+/* Modal and dialog overlays */
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* Custom utilities for admin interface */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Print styles for reports */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-before: always;
+  }
+  
+  .print-table {
+    font-size: 12px;
+  }
+  
+  .print-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: white;
+    border-bottom: 1px solid #000;
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border: hsl(0, 0%, 0%);
+    --primary: hsl(240, 100%, 50%);
+  }
+}
+
+/* Mobile responsiveness enhancements */
+@media (max-width: 768px) {
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .admin-sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .mobile-table {
+    font-size: 14px;
+  }
+  
+  .mobile-table th,
+  .mobile-table td {
+    padding: 8px 4px;
+  }
+  
+  .mobile-hide {
+    display: none;
+  }
+}
+
+/* Ensure proper font rendering */
+@supports (font-variation-settings: normal) {
+  body {
+    font-family: 'Inter var', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+}
