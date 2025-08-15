@@ -58,17 +58,17 @@ function Router() {
             </a>
           </div>
         </div>
-      )} />*/
+      )} />
       
-      {/* Admin routes */}
+      {/* Admin routes }
       <Route path="/admin/*" component={AdminRouter} />
       
-      {/* Fallback to 404 */}
+      {/* Fallback to 404 }
       <Route component={NotFound} />
     </Switch>
   );
 }
-
+*/
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
