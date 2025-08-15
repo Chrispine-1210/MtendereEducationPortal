@@ -17,8 +17,6 @@ import pg from "pg";
 import ws from "ws";
 import * as schema from "./drizzle/schema";
 
-
-
 neonConfig.webSocketConstructor = ws;
 
 export const pool = new pg.Pool({ 
