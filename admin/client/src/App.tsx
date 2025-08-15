@@ -30,10 +30,11 @@ function AdminRouter() {
   );
 }
 
+/*
 function Router() {
   return (
     <Switch>
-      {/* Home route */}
+      {/* Home route }
       <Route path="/" component={() => (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
           <div className="text-center max-w-md p-8">
@@ -57,7 +58,7 @@ function Router() {
             </a>
           </div>
         </div>
-      )} />
+      )} />*/
       
       {/* Admin routes */}
       <Route path="/admin/*" component={AdminRouter} />
