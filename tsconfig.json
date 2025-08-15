@@ -21,7 +21,6 @@
     "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./client/src/*"],
-      "@admin/*": ["./admin/*"],
       "@server/*": ["./server/*"],
       "@shared/*": ["./shared/*"]
     }
@@ -30,6 +29,6 @@
     "esm": true,
     "experimentalSpecifierResolution": "node",
   },
-  "include": ["client/src","admin/src", "server", "shared"],
+  "include": ["client/src", "server", "shared"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"]
 }
