@@ -11,6 +11,7 @@ function AdminRouter() {
   return (
     <AdminLayout>
       <Switch>
+        <Route path="/admin" component={Dashboard} />
         <Route path="/admin/dashboard" component={Dashboard} />
         <Route path="/admin/scholarships" component={() => <div className="p-6"><h1 className="text-2xl font-bold">Scholarships Management</h1><p className="mt-2 text-gray-600">Coming soon</p></div>} />
         <Route path="/admin/jobs" component={() => <div className="p-6"><h1 className="text-2xl font-bold">Jobs Management</h1><p className="mt-2 text-gray-600">Coming soon</p></div>} />
@@ -29,11 +30,10 @@ function AdminRouter() {
   );
 }
 
-/*
 function Router() {
   return (
     <Switch>
-      {/* Home route }
+      {/* Home route */}
       <Route path="/" component={() => (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
           <div className="text-center max-w-md p-8">
@@ -59,21 +59,21 @@ function Router() {
         </div>
       )} />
       
-      {/* Admin routes }
+      {/* Admin routes */}
       <Route path="/admin/*" component={AdminRouter} />
       
-      {/* Fallback to 404 }
+      {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
   );
 }
-*/
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Route />
+        <Router />
       </TooltipProvider>
     </QueryClientProvider>
   );
