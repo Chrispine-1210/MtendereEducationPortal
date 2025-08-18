@@ -9,9 +9,9 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            "@": path.resolve(import.meta.dirname, "./client", "./client/src"),
-            "@server": path.resolve(import.meta.dirname, "./server"),            
-            "@shared": path.resolve(import.meta.dirname, "./shared"),
+            "@/": path.resolve(import.meta.dirname, "./client", "./client/src/main"),
+            "@server/": path.resolve(import.meta.dirname, "./server/index"),            
+            "@shared/": path.resolve(import.meta.dirname, "./shared/schema"),
         },
     },
     root: path.resolve(import.meta.dirname, "./client",),
