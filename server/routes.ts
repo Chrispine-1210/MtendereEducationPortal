@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { getChatResponse } from "./ai";
 
-const JWT_SECRET = process.env.JWT_SECRET || "85f106ad5a34f3df580bda5cf1f08390a4909744c8053a11103ae0ff612a3a156fc45a1277509a44b692eb94bf71510f558dcfb321d1b79fb73d7af632662560";
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 // Authentication middleware
 const authenticateToken = (req: any, res: any, next: any) => {
