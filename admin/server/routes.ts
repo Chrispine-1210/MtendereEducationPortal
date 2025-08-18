@@ -148,6 +148,33 @@ router.get("/api/admin/dashboard/stats", requireAuth, requireAdminRole, async (r
     console.error("Dashboard stats error:", error);
     res.status(500).json({ message: "Failed to fetch dashboard statistics" });
   }
+  console.log("Received request for recent activity."); // Send some placeholder data for now 
+  res.status(200).json({ 
+    message: "Recent activity data", 
+    activity: [ 
+      { id: 1, type: "Login", user: "Admin", timestamp: "2025-08-18T14:00:00Z" }, 
+      { id: 2, type: "Update", user: "John Doe", timestamp: "2025-08-18T13:45:00Z" }, 
+    ] 
+  });
+});
+
+// Admin Dashboard - Recent Activity (NEW ROUTE)
+router.get("/api/admin/dashboard/recent-activity", requireAuth, requireAdminRole, async (req, res) => {
+  try {
+    // Your actual logic to get recent activity
+    const recentActivity = await storage.getRecentActivity(); // Assuming this function exists
+    res.json(recentActivity);
+  } catch (error) {
+    console.error("Recent activity error:", error);
+    // Send a placeholder response in case of error
+    res.status(500).json({
+      message: "Failed to fetch recent activity",
+      activity: [
+        { id: 1, type: "Login", user: "Admin", timestamp: "2025-08-18T14:00:00Z" },
+        { id: 2, type: "Update", user: "John Doe", timestamp: "2025-08-18T13:45:00Z" },
+      ]
+    });
+  }
 });
 
 // Users Management

@@ -1,8 +1,10 @@
+//admin-api.ts
 import { apiRequest } from "./queryClient";
 
 // Dashboard API
 export const dashboardApi = {
   getStats: () => apiRequest("GET", "/api/admin/dashboard/stats"),
+
 };
 
 // Users API
