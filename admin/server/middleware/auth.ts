@@ -18,7 +18,7 @@ export const requireAuth = async (req: AuthenticatedRequest, res: Response, next
     }
 
     const token = authHeader.substring(7);
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key') as any;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || '85f106ad5a34f3df580bda5cf1f08390a4909744c8053a11103ae0ff612a3a156fc45a1277509a44b692eb94bf71510f558dcfb321d1b79fb73d7af632662560') as any;
     
     if (!decoded.userId) {
       return res.status(401).json({ message: 'Invalid token' });
