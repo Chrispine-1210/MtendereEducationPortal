@@ -8,15 +8,13 @@ import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 
-
 // Add these console logs
 console.log("--- vite.config.ts loaded ---");
 console.log("import.meta.dirname (vite.config.ts context):", import.meta.dirname);
-console.log("Resolved root path:", path.resolve(import.meta.dirname, "../client"));
+console.log("Resolved root path:", path.resolve(import.meta.dirname, "../client/src"));
 console.log("----------------------------");
 
 const viteLogger = createLogger();
-
 
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
@@ -26,10 +24,8 @@ export function log(message: string, source = "express") {
     hour12: true,
   });
 
-
   console.log(`${formattedTime} [${source}] ${message}`);
 }
-
 
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
@@ -37,7 +33,6 @@ export async function setupVite(app: Express, server: Server) {
     hmr: { server },
     allowedHosts: true as const,
   };
-
 
   const vite = await createViteServer({
     ...viteConfig,
@@ -53,12 +48,7 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-
   app.use(vite.middlewares); // ✅ Vite's middleware should come first to handle its assets.
-
-  // ❌ REMOVE the problematic app.use("/api", ...) block here.
-  // API routes should be handled by your dedicated API router in server/index.ts,
-  // and they must be defined *before* the final catch-all HTML route.
 
   // This catch-all must come LAST for non-API routes to serve index.html.
   app.use("*", async (req, res, next) => {
@@ -73,17 +63,16 @@ export async function setupVite(app: Express, server: Server) {
     try {
       const clientTemplate = path.resolve(
         import.meta.dirname,
-        "../",
-        "client",
-        "index.html", // Ensure this path is correct
+        "../client/index.html" // Ensure this path is correct
       );
 
       // Always reload the index.html file from disk in case it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
-      template = template.replace(
-        `../client/src/main.tsx"`,
-        `../client/src="/src/main.tsx?v=${nanoid()}"`, // Add cache-buster
-      );
+      // REMOVE OR COMMENT OUT THIS LINE:
+      // template = template.replace(
+      //   `"../client/src/main.tsx"`,
+      //   `../client/src="/src/main.tsx?v=${nanoid()}"`, // Add cache-buster
+      // );
 
       const page = await vite.transformIndexHtml(url, template);
       res.status(200).set({ "Content-Type": "text/html" }).end(page);
@@ -105,7 +94,8 @@ export function serveStatic(app: Express) {
 
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
+  // fall through to index
+  // .html if the file doesn't exist
   app.use("/api", (_req, res) => {
     res.sendFile(path.resolve(distPath, "index.html"));
   });

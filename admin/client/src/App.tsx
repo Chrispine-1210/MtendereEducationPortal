@@ -7,6 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Dashboard from "@/pages/admin/dashboard";
+import Login from "@/pages/login";
+import Register from "@/pages/register";
 import NotFound from "@/pages/not-found";
 import Scholarships from "./pages/admin/scholarships";
 import Partners from "./pages/admin/partners";
@@ -24,8 +26,10 @@ function AdminRouter() {
   return (
     <AdminLayout>
       <Switch>
-        <Route path="/admin/" component={Dashboard} />
+        <Route path="/admin" component={Dashboard} />
         <Route path="/admin/dashboard" component={Dashboard} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
         <Route path="/admin/scholarships" component={Scholarships} />
         <Route path="/admin/jobs" component={Jobs} />
         <Route path="/admin/partners" component={Partners} />
@@ -60,7 +64,7 @@ function Router() {
               Your comprehensive educational consulting platform for scholarships, job opportunities, and academic partnerships.
             </p>
             <a 
-              href="/admin/dashboard" 
+              href="/admin/" 
               className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors duration-200 shadow-lg hover:shadow-xl"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,10 +76,21 @@ function Router() {
         </div>
       )} />
       
-      {/* Admin routes */}
-      <Route path="/admin/dashboard" component={AdminRouter} />
-      
-      {/* Fallback to 404 */}
+      <Route path="/admin" component={Dashboard} />
+      <Route path="/admin/dashboard" component={Dashboard} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/admin/scholarships" component={Scholarships} />
+      <Route path="/admin/jobs" component={Jobs} />
+      <Route path="/admin/partners" component={Partners} />
+      <Route path="/admin/blog" component={Blogs} />
+      <Route path="/admin/team" component={Teams} />
+      <Route path="/admin/users" component={Users} />
+      <Route path="/admin/roles" component={Roles} />
+      <Route path="/admin/applications" component={Applications} />
+      <Route path="/admin/analytics" component={Analytics} />
+      <Route path="/admin/ai-chat" component={AiChat} />
+      <Route path="/admin/settings" component={Settings} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -90,7 +105,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router />
+        <AdminRouter />
       </TooltipProvider>
     </QueryClientProvider>
   );
