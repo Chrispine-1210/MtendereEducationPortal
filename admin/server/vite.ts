@@ -8,6 +8,11 @@ import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 
+// Add these console logs
+console.log("--- vite.config.ts loaded ---");
+console.log("import.meta.dirname (vite.config.ts context):", import.meta.dirname);
+console.log("Resolved root path:", path.resolve(import.meta.dirname, "./client"));
+console.log("----------------------------");
 
 const viteLogger = createLogger();
 

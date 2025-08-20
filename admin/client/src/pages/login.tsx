@@ -1,4 +1,4 @@
-Your login handler (e.g., client/src/components/auth/LoginForm.tsx)
+//Your login handler (e.g., client/src/components/auth/LoginForm.tsx)
 
 const handleSubmit = async (e) => {
     e.preventDefault();
