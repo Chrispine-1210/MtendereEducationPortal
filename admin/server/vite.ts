@@ -8,10 +8,11 @@ import { type Server } from "http";
 import viteConfig from "../vite.config";
 import { nanoid } from "nanoid";
 
+
 // Add these console logs
 console.log("--- vite.config.ts loaded ---");
 console.log("import.meta.dirname (vite.config.ts context):", import.meta.dirname);
-console.log("Resolved root path:", path.resolve(import.meta.dirname, "./client"));
+console.log("Resolved root path:", path.resolve(import.meta.dirname, "../client"));
 console.log("----------------------------");
 
 const viteLogger = createLogger();
@@ -72,7 +73,7 @@ export async function setupVite(app: Express, server: Server) {
     try {
       const clientTemplate = path.resolve(
         import.meta.dirname,
-        "..",
+        "../",
         "client",
         "index.html", // Ensure this path is correct
       );
@@ -80,8 +81,8 @@ export async function setupVite(app: Express, server: Server) {
       // Always reload the index.html file from disk in case it changes
       let template = await fs.promises.readFile(clientTemplate, "utf-8");
       template = template.replace(
-        `src="/src/main.tsx"`,
-        `src="/src/main.tsx?v=${nanoid()}"`, // Add cache-buster
+        `../client/src/main.tsx"`,
+        `../client/src="/src/main.tsx?v=${nanoid()}"`, // Add cache-buster
       );
 
       const page = await vite.transformIndexHtml(url, template);
