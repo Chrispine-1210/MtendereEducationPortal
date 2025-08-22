@@ -20,7 +20,6 @@ import AiChat from "./pages/admin/ai-chat";
 import Users from "./pages/admin/users";
 import Settings from "./pages/admin/settings";
 
-
 function AdminRouter() {
   return (
     <AdminLayout>
@@ -33,8 +32,6 @@ function AdminRouter() {
         <Route path="/admin/blog" component={Blogs} />
         <Route path="/admin/team" component={Teams} />
         <Route path="/admin/users" component={Users} />
-        <Route path="/admin/login" component={Login} />
-        <Route path="/admin/register" component={Register} />
         <Route path="/admin/roles" component={Roles} />
         <Route path="/admin/applications" component={Applications} />
         <Route path="/admin/analytics" component={Analytics} />
@@ -77,8 +74,20 @@ function Router() {
       
 
       {/* Admin routes */}
-      <Route component={Login} />
-      <Route component={Register} />
+      <Route path="/admin" component={Login} />
+      <Route path="/admin/register" component={Register} />
+      <Route path="/admin/dashboard" component={Dashboard} />
+      <Route path="/admin/scholarships" component={Scholarships} />
+      <Route path="/admin/jobs" component={Jobs} />
+      <Route path="/admin/partners" component={Partners} />
+      <Route path="/admin/blogs" component={Blogs} />
+      <Route path="/admin/teams" component={Teams} />
+      <Route path="/admin/users" component={Users} />
+      <Route path="/admin/roles" component={Roles} />
+      <Route path="/admin/application" component={Applications} />
+      <Route path="/admin/analytics" component={Analytics} />
+      <Route path="/admin/ai-chat" component={AiChat} />
+      <Route path="/admin/settings" component={Settings} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />

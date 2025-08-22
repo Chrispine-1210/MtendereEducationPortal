@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { z } from "zod";
 import { storage } from "./storage";
+import { createServer, type Server } from "http";
+import { WebSocketServer, WebSocket } from "ws";
 import { requireAuth, requireAdminRole, requireSuperAdmin } from "./middleware/auth";
 import { uploadMiddleware, processImage, generateImageSizes } from "./services/upload";
 import { moderateContent, generateContentSuggestions, analyzeChatConversation } from "./services/openai";
@@ -16,9 +18,9 @@ import {
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import path from "path";
-import { createServer } from "http";
 
 const router = Router();
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 // Helper function to validate request body
 const validateBody = (schema: z.ZodSchema) => {
@@ -38,8 +40,72 @@ const validateBody = (schema: z.ZodSchema) => {
   };
 };
 
+// Authentication middleware
+const authenticateToken = (req: any, res: any, next: any) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Access token required' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err: any, user: any) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid or expired token' });
+    }
+    req.user = user;
+    next();
+  });
+};
+
+// Admin middleware
+const requireAdmin = (req: any, res: any, next: any) => {
+  if (req.user?.role !== 'admin' && req.user?.role !== 'super_admin') {
+    return res.status(403).json({ message: 'Admin access required' });
+  }
+  next();
+};
+
+export async function registerRoutes(app: any) {
+  const httpServer = createServer(app);
+
+  // WebSocket setup for real-time updates
+  const wss = new WebSocketServer({ server: httpServer, path: '/ws' });
+  
+  wss.on('connection', (ws: WebSocket) => {
+    console.log('WebSocket client connected');
+
+    ws.on('message', (message: string) => {
+      try {
+        const data = JSON.parse(message);
+        if (data.type === 'subscribe') {
+          (ws as any).subscriptions = data.channels || [];
+        }
+      } catch (error) {
+        console.error('WebSocket message error:', error);
+      }
+    });
+
+    ws.on('close', () => {
+      console.log('WebSocket client disconnected');
+    });
+  });
+
+  // Broadcast function for real-time updates
+  const broadcast = (channel: string, data: any) => {
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        const subscriptions = (client as any).subscriptions || [];
+        if (subscriptions.includes(channel)) {
+          client.send(JSON.stringify({ channel, data }));
+        }
+      }
+    });
+  };
+}
+
 // Authentication routes
-router.post("/auth/login", async (req, res) => {
+router.post("/api/auth/login", async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -84,7 +150,7 @@ router.post("/auth/login", async (req, res) => {
   }
 });
 
-router.post("/auth/register", async (req, res) => {
+router.post("/api/auth/register", async (req, res) => {
   try {
     const { username, email, password, firstName, lastName } = req.body;
 
@@ -662,12 +728,3 @@ router.use("/uploads", (req, res, next) => {
 });
 
 export default router;
-
-export function registerRoutes(app: any) {
-  app.use(router);
-  
-  // Return the HTTP server for WebSocket setup
-  const server = createServer(app);
-  
-  return server;
-}
