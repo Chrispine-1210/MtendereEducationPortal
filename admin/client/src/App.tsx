@@ -20,11 +20,14 @@ import AiChat from "./pages/admin/ai-chat";
 import Users from "./pages/admin/users";
 import Settings from "./pages/admin/settings";
 
+
 function AdminRouter() {
   return (
     <AdminLayout>
       <Switch>
         <Route path="/admin" component={Dashboard} />
+        <Route path="/admin/login" component={Login} />
+        <Route path="/admin/register" component={Register} />
         <Route path="/admin/dashboard" component={Dashboard} />
         <Route path="/admin/scholarships" component={Scholarships} />
         <Route path="/admin/jobs" component={Jobs} />
@@ -74,20 +77,21 @@ function Router() {
       
 
       {/* Admin routes */}
-      <Route path="/admin" component={Login} />
-      <Route path="/admin/register" component={Register} />
-      <Route path="/admin/dashboard" component={Dashboard} />
-      <Route path="/admin/scholarships" component={Scholarships} />
-      <Route path="/admin/jobs" component={Jobs} />
-      <Route path="/admin/partners" component={Partners} />
-      <Route path="/admin/blogs" component={Blogs} />
-      <Route path="/admin/teams" component={Teams} />
-      <Route path="/admin/users" component={Users} />
-      <Route path="/admin/roles" component={Roles} />
-      <Route path="/admin/application" component={Applications} />
-      <Route path="/admin/analytics" component={Analytics} />
-      <Route path="/admin/ai-chat" component={AiChat} />
-      <Route path="/admin/settings" component={Settings} />
+      <Route component={Login} />
+      <Route component={Register} />
+      <Route component={Dashboard} />
+      <Route component={Dashboard} />
+      <Route component={Scholarships} />
+      <Route component={Jobs} />
+      <Route component={Partners} />
+      <Route component={Blogs} />
+      <Route component={Teams} />
+      <Route component={Users} />
+      <Route component={Roles} />
+      <Route component={Applications} />
+      <Route component={Analytics} />
+      <Route component={AiChat} />
+      <Route component={Settings} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />
